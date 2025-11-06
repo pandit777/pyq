@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses - IGU PYQ</title>
+    <link data-default-icon="https://tse3.mm.bing.net/th/id/OIP.z_fzg6Mzca-JYwBcFMihTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" rel="icon" sizes="192x192" href="https://tse3.mm.bing.net/th/id/OIP.z_fzg6Mzca-JYwBcFMihTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" />
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom styles */
+        :root {
+            --primary: #4c8cae;
+            --primary-dark: #3a6d8a;
+            --secondary: #f8f9fa;
+            --accent: #e63946;
+            --text: #2d3748;
+            --text-light: #718096;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header styles matching the first example */
+        header {
+            background: linear-gradient(135deg, #1a237e, #283593);
+            color: white;
+            padding: 0;
+            position: relative;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header-image {
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #1a237e;
+            position: relative;
+        }
+        
+        .header-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        marquee {
+            background: #ffc107;
+            color: #333;
+            padding: 10px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            width: 100%;
+        }
+        
+        nav {
+            background-color: #285b53;
+            padding: 15px 0;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            background-color: #283593;
+        }
+        
+        /* Mobile-specific styles */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 100;
+            background-color: rgba(0,0,0,0.5);
+            border-radius: 4px;
+            padding: 5px 10px;
+        }
+
+        .mobile-nav {
+            display: none;
+            background-color: #285b53;
+            padding: 1rem;
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .mobile-nav ul li {
+            margin: 10px 0;
+        }
+
+        .mobile-nav ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .mobile-nav ul li a:hover {
+            background-color: #283593;
+        }
+        
+        /* Rest of the custom styles */
+        .course-button {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .course-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.6s ease;
+        }
+        
+        .course-button:hover::before {
+            left: 100%;
+        }
+        
+        .course-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .course-button:active {
+            transform: translateY(-2px);
+        }
+        
+        .course-button i {
+            font-size: 1.2rem;
+        }
+        
+        .welcome-section {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-top: 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .welcome-section:hover {
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+            transform: translateY(-3px);
+        }
+        
+        footer {
+            margin-top: auto;
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            width: 100%;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Animation for page load */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        main {
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
+            color: var(--primary-dark);
+        }
+
+        /* Mobile responsive adjustments */
+        @media (max-width: 768px) {
+            .header-image { 
+                height: auto;
+                min-height: 150px;
+            }
+            
+            nav ul { 
+                display: none; 
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .category-title {
+                font-size: 1.3rem;
+                margin-top: 1.5rem;
+            }
+            
+            .course-button {
+                padding: 15px 20px !important;
+                font-size: 1rem !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .category-title {
+                font-size: 1.2rem;
+            }
+            
+            .course-button {
+                padding: 12px 16px !important;
+                font-size: 0.9rem !important;
+            }
+            
+            footer {
+                padding: 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-image">
+            <img src="https://image2url.com/images/1762095118035-e836127f-fdf8-449e-8036-4e4e6e8a1925.jpg" alt="Indira Gandhi University Header">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <marquee behavior="scroll" direction="left" scrollamount="6">
+            Welcome to the IGU PYQ Portal - Your Gateway to Academic Excellence!
+        </marquee>
+        <nav>
+            <ul>
+                <li><a href="https://pandit777.github.io/IGUPYQ/">Home</a></li>
+                <li><a href="Course.html">Courses</a></li>
+                <li><a href="About.html">About Us</a></li>
+                <li><a href="Contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        
+        <div class="mobile-nav" id="mobileNav">
+            <ul>
+                <li><a href="https://pandit777.github.io/IGUPYQ/">Home</a></li>
+                <li><a href="Course.html">Courses</a></li>
+                <li><a href="About.html">About Us</a></li>
+                <li><a href="Contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-6 flex flex-col items-center">
+
+        <!-- Course Selection Buttons -->
+        <section class="mt-10 w-full max-w-6xl">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Explore by Course</h2>
+            
+            <!-- Undergraduate Courses -->
+            <h3 class="category-title">Undergraduate Programs</h3>
+            <div id="course-selection" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 course-grid">
+                <button onclick="btech()" class="course-button bg-blue-600 text-white py-5 px-6 rounded-xl shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 text-lg font-semibold">
+                    <i>📚</i> B.Tech
+                </button>
+                <button onclick="bca()" class="course-button bg-green-600 text-white py-5 px-6 rounded-xl shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75 text-lg font-semibold">
+                    <i>💻</i> BCA
+                </button>
+                <button onclick="bcom()" class="course-button bg-purple-600 text-white py-5 px-6 rounded-xl shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-opacity-75 text-lg font-semibold">
+                    <i>📊</i> B.Com
+                </button>
+                <button onclick="bba()" class="course-button bg-red-600 text-white py-5 px-6 rounded-xl shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-75 text-lg font-semibold">
+                    <i>🏢</i> BBA
+                </button>
+                <button onclick="bsc()" class="course-button bg-amber-600 text-white py-5 px-6 rounded-xl shadow-md hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-opacity-75 text-lg font-semibold">
+                    <i>🔬</i> BSc
+                </button>
+                <button onclick="ba()" class="course-button bg-teal-600 text-white py-5 px-6 rounded-xl shadow-md hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-opacity-75 text-lg font-semibold">
+                    <i>🎓</i> BA
+                </button>
+                <button onclick="bpharmacy()" class="course-button bg-cyan-600 text-white py-5 px-6 rounded-xl shadow-md hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-opacity-75 text-lg font-semibold">
+                    <i>💊</i> B.Pharmacy
+                </button>
+                <button onclick="ballb()" class="course-button bg-indigo-600 text-white py-5 px-6 rounded-xl shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75 text-lg font-semibold">
+                    <i>⚖️</i> BALLB
+                </button>
+                <button onclick="bjmc()" class="course-button bg-pink-600 text-white py-5 px-6 rounded-xl shadow-md hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-opacity-75 text-lg font-semibold">
+                    <i>📰</i> BJMC
+                </button>
+                <button onclick="bhmct()" class="course-button bg-rose-600 text-white py-5 px-6 rounded-xl shadow-md hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:ring-opacity-75 text-lg font-semibold">
+                    <i>🏨</i> BHMCT
+                </button>
+                <button onclick="bed()" class="course-button bg-lime-600 text-white py-5 px-6 rounded-xl shadow-md hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-400 focus:ring-opacity-75 text-lg font-semibold">
+                    <i>👨‍🏫</i> B.Ed
+                </button>
+                <button onclick="bped()" class="course-button bg-emerald-600 text-white py-5 px-6 rounded-xl shadow-md hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-opacity-75 text-lg font-semibold">
+                    <i>🏃‍♂️</i> BPED
+                </button>
+                <button onclick="msw()" class="course-button bg-fuchsia-600 text-white py-5 px-6 rounded-xl shadow-md hover:bg-fuchsia-700 focus:outline-none focus:ring-2 focus:ring-fuchsia-400 focus:ring-opacity-75 text-lg font-semibold">
+                    <i>🤝</i> MSW
+                </button>
+            </div>
+            
+            <!-- Postgraduate Courses -->
+            <h3 class="category-title">Postgraduate Programs</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 course-grid">
+                <button onclick="mtech()" class="course-button bg-blue-700 text-white py-5 px-6 rounded-xl shadow-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 text-lg font-semibold">
+                    <i>🔧</i> M.Tech
+                </button>
+                <button onclick="ma()" class="course-button bg-teal-600 text-white py-5 px-6 rounded-xl shadow-md hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-opacity-75 text-lg font-semibold">
+                    <i>🎓</i> MA
+                </button>
+                <button onclick="mcom()" class="course-button bg-purple-600 text-white py-5 px-6 rounded-xl shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-opacity-75 text-lg font-semibold">
+                    <i>📊</i> M.Com
+                </button>
+                <button onclick="msc()" class="course-button bg-amber-700 text-white py-5 px-6 rounded-xl shadow-md hover:bg-amber-800 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-opacity-75 text-lg font-semibold">
+                    <i>🧪</i> MSc
+                </button>
+                <button onclick="mba()" class="course-button bg-red-700 text-white py-5 px-6 rounded-xl shadow-md hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-75 text-lg font-semibold">
+                    <i>📈</i> MBA
+                </button>
+                <button onclick="mca()" class="course-button bg-green-700 text-white py-5 px-6 rounded-xl shadow-md hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-75 text-lg font-semibold">
+                    <i>💾</i> MCA
+                </button>
+                <button onclick="mpharma()" class="course-button bg-cyan-700 text-white py-5 px-6 rounded-xl shadow-md hover:bg-cyan-800 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-75 text-lg font-semibold">
+                    <i>🧬</i> M.Pharma
+                </button>
+                <button onclick="llb()" class="course-button bg-indigo-700 text-white py-5 px-6 rounded-xl shadow-md hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75 text-lg font-semibold">
+                    <i>📜</i> LLB
+                </button>
+            </div>
+            
+            <!-- Research Programs -->
+            <h3 class="category-title">Research Programs</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 course-grid">
+                <button onclick="phd()" class="course-button bg-purple-700 text-white py-5 px-6 rounded-xl shadow-md hover:bg-purple-800 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-75 text-lg font-semibold">
+                    <i>🔍</i> Ph.D
+                </button>
+                <button onclick="mphil()" class="course-button bg-teal-700 text-white py-5 px-6 rounded-xl shadow-md hover:bg-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-opacity-75 text-lg font-semibold">
+                    <i>📖</i> M.Phil
+                </button>
+                <button onclick="dped()" class="course-button bg-emerald-700 text-white py-5 px-6 rounded-xl shadow-md hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-opacity-75 text-lg font-semibold">
+                    <i>🏅</i> DPED
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2025 IGU PYQ Portal | Designed by Gourav
+    </footer>
+
+    <script>
+        // Mobile menu toggle functionality
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const mobileNav = document.getElementById('mobileNav');
+            const icon = this.querySelector('i');
+            
+            if (mobileNav.style.display === 'block') {
+                mobileNav.style.display = 'none';
+                icon.className = 'fas fa-bars';
+            } else {
+                mobileNav.style.display = 'block';
+                icon.className = 'fas fa-times';
+            }
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            
+            if (!mobileNav.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
+                mobileNav.style.display = 'none';
+                mobileMenuBtn.querySelector('i').className = 'fas fa-bars';
+            }
+        });
+
+        // Existing functions for course buttons
+        function btech(){
+            window.location.href="B.Tech.html";
+        }
+
+        function bca(){
+            window.location.href="BCA.html";
+        }
+
+        function bcom(){
+            window.location.href="BCom.html";
+        }
+
+        function bba(){
+            window.location.href="BBA.html";
+        }
+
+        function bsc(){
+            window.location.href="BSc.html";
+        }
+
+        function ba(){
+            window.location.href="BA.html";
+        }
+        
+        // New functions for additional courses
+        function mtech(){
+            window.location.href="MTech.html";
+        }
+
+        function ma(){
+            window.location.href="MA.html";
+        }
+
+        function msc(){
+            window.location.href="MSc.html";
+        }
+
+        function mba(){
+            window.location.href="MBA.html";
+        }
+
+        function mca(){
+            window.location.href="MCA.html";
+        }
+
+        function mcom(){
+            window.location.href="MCom.html";
+        }
+
+        function bed(){
+            window.location.href="BEd.html";
+        }
+
+        function bhmct(){
+            window.location.href="BHMCT.html";
+        }
+
+        function ballb(){
+            window.location.href="BALLB.html";
+        }
+
+        function bjmc(){
+            window.location.href="BJMC.html";
+        }
+
+        function bped(){
+            window.location.href="BPED.html";
+        }
+
+        function dped(){
+            window.location.href="DPED.html";
+        }
+        
+        // Functions for newly requested courses
+        function mpharma(){
+            window.location.href="MPharma.html";
+        }
+
+        function bpharmacy(){
+            window.location.href="BPharmacy.html";
+        }
+
+        function llb(){
+            window.location.href="LLb.html";
+        }
+
+        function phd(){
+            window.location.href="PhD.html";
+        }
+
+        function mphil(){
+            window.location.href="MPhil.html";
+        }
+
+        function msw(){
+            window.location.href="MSW.html";
+        }
+    </script>
+</body>
+</html>
