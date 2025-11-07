@@ -149,8 +149,6 @@
       border-radius: 10px;
       font-weight: 600;
       transition: 0.3s;
-      text-decoration: none;
-      display: inline-block;
     }
 
     .explore-btn:hover {
@@ -158,180 +156,10 @@
       transform: translateY(-2px);
     }
 
-    .team-section {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 2rem;
-      flex-wrap: wrap;
-    }
-
-    .team-member {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      max-width: 250px;
-    }
-
-    .team-img {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      object-fit: cover;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-      border: 4px solid #e2e8f0;
-      transition: all 0.3s ease;
-    }
-
-    .team-img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
-      border-color: var(--primary);
-    }
-
-    .team-name {
-      font-weight: 600;
-      margin-top: 1rem;
-      color: var(--text);
-      font-size: 1.1rem;
-    }
-
-    .team-role {
-      color: var(--text-light);
-      margin-top: 0.25rem;
-      font-size: 0.9rem;
-    }
-
-    .team-description {
-      margin-top: 0.5rem;
-      color: var(--text);
-      font-size: 0.9rem;
-      text-align: center;
-    }
-
-    /* Mobile-specific header improvements */
     @media (max-width: 768px) {
-      .header-image { 
-        height: 120px; 
-      }
-      
-      marquee {
-        font-size: 1rem;
-        padding: 8px;
-      }
-      
-      nav ul { 
-        flex-direction: column; 
-        align-items: center;
-        padding: 0;
-        margin: 0;
-      }
-      
-      nav ul li { 
-        margin: 8px 0;
-        width: 100%;
-        text-align: center;
-      }
-      
-      nav ul li a {
-        display: block;
-        padding: 12px 15px;
-        width: 100%;
-        font-size: 1rem;
-        border-radius: 6px;
-        margin: 2px 0;
-      }
-      
-      .welcome-section {
-        padding: 1.5rem;
-        margin-top: 1.5rem;
-        width: 95%;
-      }
-      
-      .hero-title {
-        font-size: 1.8rem;
-        line-height: 1.3;
-      }
-      
-      .hero-subtitle {
-        font-size: 1rem;
-        line-height: 1.5;
-      }
-      
-      .explore-btn {
-        padding: 0.8rem 1.5rem;
-        font-size: 0.9rem;
-        display: block;
-        width: 100%;
-        margin: 0.5rem 0;
-        text-align: center;
-      }
-      
-      .team-section {
-        flex-direction: column;
-        align-items: center;
-        gap: 1.5rem;
-        margin-top: 1.5rem;
-      }
-      
-      .team-member {
-        margin-bottom: 1rem;
-      }
-      
-      .team-img {
-        width: 140px;
-        height: 140px;
-      }
-      
-      footer {
-        padding: 1rem;
-        font-size: 0.9rem;
-      }
-    }
-
-    /* Extra small devices (phones) */
-    @media (max-width: 480px) {
-      .header-image { 
-        height: 100px; 
-      }
-      
-      .hero-title {
-        font-size: 1.6rem;
-      }
-      
-      .hero-subtitle {
-        font-size: 0.95rem;
-      }
-      
-      .welcome-section {
-        padding: 1.25rem;
-        margin-top: 1rem;
-      }
-      
-      .team-img {
-        width: 120px;
-        height: 120px;
-      }
-      
-      nav ul li a {
-        padding: 10px 12px;
-        font-size: 0.95rem;
-      }
-    }
-
-    /* Button container for better mobile layout */
-    .btn-container {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    @media (max-width: 768px) {
-      .btn-container {
-        flex-direction: column;
-        gap: 0.5rem;
-      }
+      .header-image { height: 200px; }
+      nav ul { flex-direction: column; align-items: center; }
+      nav ul li { margin: 5px 0; }
     }
   </style>
 </head>
@@ -362,10 +190,8 @@
         Explore previous year question papers (PYQs) for every course offered by Indira Gandhi University, Meerpur.  
         Our goal is to make your exam preparation simple, organized, and effective.
       </p>
-      <div class="btn-container">
-        <a href="Course.html" class="explore-btn">Explore Courses</a>
-        <a href="https://igu.ac.in/iguacademic?show=3" class="explore-btn">Explore Syllabus</a>
-      </div>
+      <a href="Course.html" class="explore-btn inline-block">Explore Courses</a>
+      <a href="https://igu.ac.in/iguacademic?show=3" class="explore-btn inline-block ml-4">Explore Syllabus</a>
     </section>
 
     <section class="welcome-section max-w-5xl mt-10 text-left">
@@ -384,28 +210,12 @@
         To empower IGU students with easy access to academic materials and promote smart learning.  
         With IGU PYQ, you can focus on understanding and revising instead of searching endlessly for papers.
       </p>
-      
-      <div class="team-section">
-        <div class="team-member">
-          <img src="https://pandit777.github.io/pyq/Dev.jpeg" alt="Developer IMG" class="team-img">
-          <div class="team-name">Gourav Sharma</div>
-          <div class="team-role">Developer</div>
-          <div class="team-description">Developed with ❤️</div>
-        </div>
-        
-        <div class="team-member">
-          <img src="https://pandit777.github.io/pyq/Edit.jpeg" alt="Editor IMG" class="team-img">
-          <div class="team-name">Mahesh Verma</div>
-          <div class="team-role">Editor</div>
-          <div class="team-description">Edited with ❤️</div>
-        </div>
-      </div>
     </section>
 
   </main>
 
   <footer>
-    &copy; 2025 IGU PYQ Portal | Designed by Gourav Sharma
+    &copy; 2025 IGU PYQ Portal | Designed by Gourav
   </footer>
 
 </body>
