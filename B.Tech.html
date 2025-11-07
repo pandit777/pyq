@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link data-default-icon="https://tse3.mm.bing.net/th/id/OIP.z_fzg6Mzca-JYwBcFMihTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" rel="icon" sizes="192x192" href="https://tse3.mm.bing.net/th/id/OIP.z_fzg6Mzca-JYwBcFMihTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" />
     <style>
-        * {
+          * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
@@ -249,6 +249,8 @@
             font-weight: 600;
             color: #1a6fc4;
             font-size: 14px;
+            flex: 1;
+            margin-right: 10px;
         }
 
         .card-semester {
@@ -258,6 +260,7 @@
             border-radius: 10px;
             font-size: 10px;
             font-weight: 500;
+            white-space: nowrap;
         }
 
         .card-details {
@@ -278,6 +281,7 @@
 
         .card-value {
             color: #333;
+            flex: 1;
         }
 
         /* Mobile-specific styles */
@@ -1586,7 +1590,8 @@
                 fourthYearCards.innerHTML = '';
 
                 // Generate cards for first year
-                firstYearTable.querySelectorAll('tbody tr').forEach(row => {
+                const firstYearRows = firstYearTable.querySelectorAll('tbody tr');
+                firstYearRows.forEach(row => {
                     if (row.style.display !== 'none') {
                         const card = createCard(row);
                         firstYearCards.appendChild(card);
@@ -1594,7 +1599,8 @@
                 });
 
                 // Generate cards for second year
-                secondYearTable.querySelectorAll('tbody tr').forEach(row => {
+                const secondYearRows = secondYearTable.querySelectorAll('tbody tr');
+                secondYearRows.forEach(row => {
                     if (row.style.display !== 'none') {
                         const card = createCard(row);
                         secondYearCards.appendChild(card);
@@ -1602,7 +1608,8 @@
                 });
 
                 // Generate cards for third year
-                thirdYearTable.querySelectorAll('tbody tr').forEach(row => {
+                const thirdYearRows = thirdYearTable.querySelectorAll('tbody tr');
+                thirdYearRows.forEach(row => {
                     if (row.style.display !== 'none') {
                         const card = createCard(row);
                         thirdYearCards.appendChild(card);
@@ -1610,7 +1617,8 @@
                 });
 
                 // Generate cards for fourth year
-                fourthYearTable.querySelectorAll('tbody tr').forEach(row => {
+                const fourthYearRows = fourthYearTable.querySelectorAll('tbody tr');
+                fourthYearRows.forEach(row => {
                     if (row.style.display !== 'none') {
                         const card = createCard(row);
                         fourthYearCards.appendChild(card);
@@ -1642,6 +1650,10 @@
                             <span class="card-label">Course:</span>
                             <span class="card-value">${cells[2].textContent}</span>
                         </div>
+                        <div class="card-detail">
+                            <span class="card-label">Year:</span>
+                            <span class="card-value">${cells[4].textContent}</span>
+                        </div>
                     </div>
                     <a data-pdf="${pdfUrl}" class="download-btn"><i class="fas fa-download"></i> Download</a>
                 `;
@@ -1652,7 +1664,7 @@
                     e.preventDefault();
                     const pdfUrl = this.getAttribute('data-pdf');
                     if (pdfUrl && pdfUrl !== '#') {
-                        window.open(pdfUrl, '_parent');
+                        window.open(pdfUrl, '_blank');
                     } else {
                         alert('PDF not available');
                     }
@@ -1729,11 +1741,13 @@
                     const paperName = row.cells[1].textContent.toLowerCase();
                     const courseName = row.cells[2].textContent.toLowerCase();
                     const semester = row.cells[3].textContent.toLowerCase();
+                    const paperId = row.cells[0].textContent.toLowerCase();
 
                     // Check if row matches search text and active filter
                     const matchesSearch = paperName.includes(searchText) ||
                                         courseName.includes(searchText) ||
-                                        semester.includes(searchText);
+                                        semester.includes(searchText) ||
+                                        paperId.includes(searchText);
 
                     const matchesFilter = activeFilter === 'all' ||
                                         semester.includes(activeFilter.toLowerCase());
