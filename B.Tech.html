@@ -190,6 +190,7 @@
             text-align: center;
             min-width: 80px;
             margin: 5px 0;
+            cursor: pointer;
         }
 
         .download-btn:hover {
@@ -222,6 +223,63 @@
             font-size: 0.8rem;
         }
 
+        /* Card layout for mobile */
+        .card-container {
+            display: none;
+            padding: 10px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid #e1e5eb;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .card-title {
+            font-weight: 600;
+            color: #1a6fc4;
+            font-size: 14px;
+        }
+
+        .card-semester {
+            background: #f0f5ff;
+            color: #1a6fc4;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 500;
+        }
+
+        .card-details {
+            margin-bottom: 10px;
+        }
+
+        .card-detail {
+            display: flex;
+            margin-bottom: 5px;
+            font-size: 12px;
+        }
+
+        .card-label {
+            color: #6c757d;
+            min-width: 80px;
+            font-weight: 500;
+        }
+
+        .card-value {
+            color: #333;
+        }
+
         /* Mobile-specific styles */
         @media (max-width: 768px) {
             .table-header {
@@ -242,57 +300,6 @@
 
             .mobile-card-view .card-container {
                 display: block;
-            }
-
-            .card {
-                background: white;
-                border-radius: 6px;
-                padding: 12px;
-                margin-bottom: 10px;
-                box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-                border: 1px solid #e1e5eb;
-            }
-
-            .card-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: 8px;
-            }
-
-            .card-title {
-                font-weight: 600;
-                color: #1a6fc4;
-                font-size: 14px;
-            }
-
-            .card-semester {
-                background: #f0f5ff;
-                color: #1a6fc4;
-                padding: 3px 8px;
-                border-radius: 10px;
-                font-size: 10px;
-                font-weight: 500;
-            }
-
-            .card-details {
-                margin-bottom: 10px;
-            }
-
-            .card-detail {
-                display: flex;
-                margin-bottom: 5px;
-                font-size: 12px;
-            }
-
-            .card-label {
-                color: #6c757d;
-                min-width: 80px;
-                font-weight: 500;
-            }
-
-            .card-value {
-                color: #333;
             }
         }
 
