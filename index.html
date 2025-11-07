@@ -156,7 +156,7 @@
       transform: translateY(-2px);
     }
 
-    /* New styles for the team section */
+    /* Team section styles */
     .team-section {
       display: flex;
       flex-wrap: wrap;
@@ -173,6 +173,7 @@
       transition: all 0.3s ease;
       max-width: 300px;
       text-align: center;
+      width: 100%;
     }
 
     .team-member:hover {
@@ -204,13 +205,78 @@
       font-weight: 500;
     }
 
+    /* Mobile responsiveness */
     @media (max-width: 768px) {
-      .header-image { height: 200px; }
-      nav ul { flex-direction: column; align-items: center; }
-      nav ul li { margin: 5px 0; }
+      .header-image { 
+        height: 200px; 
+      }
+      
+      nav ul { 
+        flex-direction: column; 
+        align-items: center; 
+        padding: 0;
+      }
+      
+      nav ul li { 
+        margin: 5px 0; 
+        width: 100%;
+        text-align: center;
+      }
+      
+      nav ul li a {
+        display: block;
+        padding: 10px;
+        width: 100%;
+      }
+      
+      .hero-title {
+        font-size: 1.8rem;
+      }
+      
+      .welcome-section {
+        padding: 1.5rem;
+        margin-top: 1rem;
+      }
+      
+      .explore-btn {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+      }
+      
+      .explore-btn.ml-4 {
+        margin-left: 0 !important;
+      }
+      
       .team-section {
         flex-direction: column;
         align-items: center;
+        gap: 1.5rem;
+      }
+      
+      .team-member {
+        max-width: 100%;
+        padding: 1.2rem;
+      }
+      
+      .member-image {
+        width: 120px;
+        height: 120px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 1.5rem;
+      }
+      
+      .welcome-section {
+        padding: 1rem;
+      }
+      
+      marquee {
+        font-size: 1rem;
+        padding: 8px;
       }
     }
   </style>
