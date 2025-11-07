@@ -106,6 +106,51 @@
       background-color: #283593;
     }
 
+    /* Mobile-specific styles */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 100;
+            background-color: rgba(0,0,0,0.5);
+            border-radius: 4px;
+            padding: 5px 10px;
+        }
+
+        .mobile-nav {
+            display: none;
+            background-color: #285b53;
+            padding: 1rem;
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .mobile-nav ul li {
+            margin: 10px 0;
+        }
+
+        .mobile-nav ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .mobile-nav ul li a:hover {
+            background-color: #283593;
+        }
+        
     footer {
       margin-top: auto;
       background: var(--primary);
