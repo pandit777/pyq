@@ -29,7 +29,7 @@
         }
 
         header {
-            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            background: linear-gradient(135deg, #b91c1c 0%, #b91c1c 100%);
             color: white;
             padding: 15px;
             text-align: center;
@@ -65,7 +65,7 @@
 
         .search-box i {
             font-size: 18px;
-            color: #dc2626;
+            color: #b91c1c;
             margin-right: 10px;
         }
 
@@ -79,8 +79,8 @@
         }
 
         .search-box input:focus {
-            border-color: #dc2626;
-            box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2);
+            border-color: #b91c1c;
+            box-shadow: 0 0 0 2px rgba(26, 111, 196, 0.2);
             outline: none;
         }
 
@@ -94,21 +94,21 @@
 
         .filter-btn {
             padding: 8px 12px;
-            background-color: #fef2f2;
-            border: 1px solid #fecaca;
+            background-color: #f0f5ff;
+            border: 1px solid #d0deff;
             border-radius: 20px;
             cursor: pointer;
             font-size: 12px;
             font-weight: 500;
-            color: #dc2626;
+            color: #b91c1c;
             transition: all 0.2s ease;
             white-space: nowrap;
         }
 
         .filter-btn:hover, .filter-btn.active {
-            background-color: #dc2626;
+            background-color: #b91c1c;
             color: white;
-            border-color: #dc2626;
+            border-color: #b91c1c;
         }
 
         .table-container {
@@ -120,7 +120,7 @@
         }
 
         .table-header {
-            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            background: linear-gradient(135deg, #b91c1c 0%, #b91c1c 100%);
             color: white;
             padding: 12px 15px;
             display: flex;
@@ -162,25 +162,25 @@
         }
 
         th {
-            background-color: #fef2f2;
+            background-color: #f8fafd;
             font-weight: 600;
-            color: #dc2626;
+            color: #b91c1c;
             position: sticky;
             top: 0;
         }
 
         tr:nth-child(even) {
-            background-color: #fef2f2;
+            background-color: #f9fbfd;
         }
 
         tr:hover {
-            background-color: #fecaca;
+            background-color: #f0f5ff;
         }
 
         .download-btn {
             display: inline-block;
             padding: 6px 10px;
-            background-color: #dc2626;
+            background-color: #b91c1c;
             color: white;
             text-decoration: none;
             border-radius: 4px;
@@ -231,262 +231,66 @@
 
         .card {
             background: white;
-            border-radius: 8px;
-            padding: 14px;
-            margin-bottom: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             border: 1px solid #e1e5eb;
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            transform: translateY(-2px);
         }
 
         .card-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 12px;
-            gap: 10px;
+            align-items: center;
+            margin-bottom: 8px;
         }
 
         .card-title {
             font-weight: 600;
-            color: #dc2626;
-            font-size: 15px;
-            line-height: 1.3;
-            flex: 1;
+            color: #b91c1c;
+            font-size: 14px;
         }
 
         .card-semester {
-            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-            color: white;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: 600;
-            white-space: nowrap;
-            flex-shrink: 0;
+            background: #f0f5ff;
+            color: #b91c1c;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 500;
         }
 
         .card-details {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .card-detail {
             display: flex;
-            margin-bottom: 6px;
-            font-size: 13px;
-            align-items: center;
+            margin-bottom: 5px;
+            font-size: 12px;
         }
 
         .card-label {
             color: #6c757d;
             min-width: 80px;
             font-weight: 500;
-            font-size: 12px;
         }
 
         .card-value {
             color: #333;
-            flex: 1;
-            font-weight: 500;
         }
 
         /* Mobile-specific styles */
         @media (max-width: 768px) {
-            .container {
-                padding: 8px;
-            }
-            
-            header {
-                padding: 12px 10px;
-                margin-bottom: 12px;
-                border-radius: 0 0 6px 6px;
-            }
-            
-            header h1 {
-                font-size: 1.4rem;
-                margin-bottom: 4px;
-            }
-            
-            header p {
-                font-size: 0.8rem;
-            }
-            
-            .search-container {
-                padding: 12px;
-                margin-bottom: 12px;
-            }
-            
-            .search-box {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            
-            .search-box i {
-                margin-right: 0;
-                margin-bottom: 8px;
-                align-self: center;
-                font-size: 16px;
-            }
-            
-            .search-box input {
-                padding: 14px 12px;
-                font-size: 16px; /* Prevents zoom on iOS */
-                border-radius: 8px;
-            }
-            
-            .filters {
-                margin-top: 12px;
-                gap: 6px;
-                justify-content: flex-start;
-                overflow-x: auto;
-                padding-bottom: 4px;
-                -webkit-overflow-scrolling: touch;
-            }
-            
-            .filter-btn {
-                padding: 10px 14px;
-                font-size: 13px;
-                border-radius: 18px;
-                flex-shrink: 0; /* Prevents buttons from shrinking */
-            }
-            
-            .table-container {
-                margin-bottom: 12px;
-                border-radius: 6px;
-            }
-            
             .table-header {
-                padding: 10px 12px;
-                flex-direction: row;
-                align-items: center;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
             }
-            
-            .table-header h2 {
-                font-size: 1.1rem;
-                flex: 1;
-            }
-            
-            .toggle-btn {
-                padding: 8px 12px;
-                font-size: 11px;
-                border-radius: 14px;
-                white-space: nowrap;
-            }
-            
-            /* Enhanced table styling for mobile */
-            table {
-                display: block;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-                white-space: nowrap;
-            }
-            
+
             th, td {
-                padding: 12px 8px;
-                font-size: 13px;
-                min-width: 80px; /* Ensures columns don't get too narrow */
-            }
-            
-            th:nth-child(1), td:nth-child(1) { min-width: 70px; } /* Paper ID */
-            th:nth-child(2), td:nth-child(2) { min-width: 120px; } /* Paper Name */
-            th:nth-child(3), td:nth-child(3) { min-width: 60px; } /* Course */
-            th:nth-child(4), td:nth-child(4) { min-width: 70px; } /* Semester */
-            th:nth-child(5), td:nth-child(5) { min-width: 60px; } /* Year */
-            th:nth-child(6), td:nth-child(6) { min-width: 100px; } /* Download */
-            
-            /* Enhanced mobile card styles */
-            .card-container {
-                padding: 8px;
-            }
-
-            .card {
-                padding: 16px;
-                margin-bottom: 10px;
-                border-radius: 10px;
-            }
-
-            .card-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
-                margin-bottom: 10px;
-            }
-
-            .card-title {
-                font-size: 16px;
-                line-height: 1.4;
-            }
-
-            .card-semester {
-                align-self: flex-start;
-                font-size: 12px;
-                padding: 5px 12px;
-            }
-
-            .card-detail {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 2px;
-                margin-bottom: 8px;
-            }
-
-            .card-label {
-                min-width: auto;
+                padding: 8px 6px;
                 font-size: 11px;
-                color: #5a6c7d;
-            }
-
-            .card-value {
-                font-size: 14px;
-                font-weight: 600;
-            }
-
-            .download-btn {
-                padding: 12px 16px;
-                font-size: 14px;
-                min-width: 100%;
-                margin: 10px 0 0 0;
-                border-radius: 8px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                gap: 8px;
-                background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-                border: none;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                text-decoration: none;
-                color: white;
-                font-weight: 600;
-            }
-
-            .download-btn:hover {
-                background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
-                transform: translateY(-1px);
-                box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
-            }
-
-            .download-btn:active {
-                transform: translateY(0);
-            }
-
-            /* Better touch targets */
-            .download-btn, .filter-btn, .toggle-btn {
-                min-height: 44px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            /* Improved visual feedback */
-            .download-btn:active, .filter-btn:active, .toggle-btn:active {
-                transform: scale(0.98);
-                transition: transform 0.1s ease;
             }
 
             /* Hide tables and show cards on mobile */
@@ -505,39 +309,6 @@
             
             .desktop-view .card-container {
                 display: none;
-            }
-        }
-
-        /* Small mobile devices */
-        @media (max-width: 480px) {
-            .card-container {
-                padding: 6px;
-            }
-
-            .card {
-                padding: 14px;
-                margin-bottom: 8px;
-            }
-
-            .card-title {
-                font-size: 15px;
-            }
-
-            .card-detail {
-                margin-bottom: 6px;
-            }
-
-            .card-label {
-                font-size: 10px;
-            }
-
-            .card-value {
-                font-size: 13px;
-            }
-
-            .download-btn {
-                padding: 10px 14px;
-                font-size: 13px;
             }
         }
 
