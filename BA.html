@@ -31,7 +31,7 @@
         }
 
         header {
-            background: linear-gradient(135deg, #b91c1c 0%, #b91c1c 100%);
+            background: linear-gradient(135deg, #1a6fc4 0%, #0c4a8f 100%);
             color: white;
             padding: 15px;
             text-align: center;
@@ -67,7 +67,7 @@
 
         .search-box i {
             font-size: 18px;
-            color: #b91c1c;
+            color: #1a6fc4;
             margin-right: 10px;
         }
 
@@ -81,7 +81,7 @@
         }
 
         .search-box input:focus {
-            border-color: #b91c1c;
+            border-color: #1a6fc4;
             box-shadow: 0 0 0 2px rgba(26, 111, 196, 0.2);
             outline: none;
         }
@@ -102,15 +102,15 @@
             cursor: pointer;
             font-size: 12px;
             font-weight: 500;
-            color: #b91c1c;
+            color: #1a6fc4;
             transition: all 0.2s ease;
             white-space: nowrap;
         }
 
         .filter-btn:hover, .filter-btn.active {
-            background-color: #b91c1c;
+            background-color: #1a6fc4;
             color: white;
-            border-color: #b91c1c;
+            border-color: #1a6fc4;
         }
 
         .table-container {
@@ -122,7 +122,7 @@
         }
 
         .table-header {
-            background: linear-gradient(135deg, #b91c1c 0%, #b91c1c 100%);
+            background: linear-gradient(135deg, #2c7bd9 0%, #1a6fc4 100%);
             color: white;
             padding: 12px 15px;
             display: flex;
@@ -166,7 +166,7 @@
         th {
             background-color: #f8fafd;
             font-weight: 600;
-            color: #b91c1c;
+            color: #1a6fc4;
             position: sticky;
             top: 0;
         }
@@ -182,7 +182,7 @@
         .download-btn {
             display: inline-block;
             padding: 6px 10px;
-            background-color: #b91c1c;
+            background-color: #1a6fc4;
             color: white;
             text-decoration: none;
             border-radius: 4px;
@@ -196,7 +196,7 @@
         }
 
         .download-btn:hover {
-            background-color: #b91c1c;
+            background-color: #0c4a8f;
             transform: translateY(-1px);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
@@ -249,17 +249,20 @@
 
         .card-title {
             font-weight: 600;
-            color: #b91c1c;
+            color: #1a6fc4;
             font-size: 14px;
+            flex: 1;
+            margin-right: 10px;
         }
 
         .card-semester {
             background: #f0f5ff;
-            color: #b91c1c;
+            color: #1a6fc4;
             padding: 3px 8px;
             border-radius: 10px;
             font-size: 10px;
             font-weight: 500;
+            white-space: nowrap;
         }
 
         .card-details {
@@ -280,6 +283,7 @@
 
         .card-value {
             color: #333;
+            flex: 1;
         }
 
         /* Mobile-specific styles */
@@ -295,22 +299,13 @@
                 font-size: 11px;
             }
 
-            /* Hide tables and show cards on mobile */
+            /* Card layout for tables on mobile */
             .mobile-card-view table {
                 display: none;
             }
 
             .mobile-card-view .card-container {
                 display: block;
-            }
-            
-            /* Desktop view classes for mobile */
-            .desktop-view table {
-                display: table;
-            }
-            
-            .desktop-view .card-container {
-                display: none;
             }
         }
 
@@ -352,15 +347,6 @@
             th, td {
                 padding: 16px 20px;
                 font-size: 14px;
-            }
-            
-            /* Always show tables on desktop */
-            .mobile-card-view table {
-                display: table;
-            }
-            
-            .mobile-card-view .card-container {
-                display: none;
             }
         }
 </style>
