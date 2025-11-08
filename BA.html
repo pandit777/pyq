@@ -6,10 +6,8 @@
     <title>BA PYQ Paper Repository</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link data-default-icon="https://tse3.mm.bing.net/th/id/OIP.z_fzg6Mzca-JYwBcFMihTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" rel="icon" sizes="192x192" href="https://tse3.mm.bing.net/th/id/OIP.z_fzg6Mzca-JYwBcFMihTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" />
-    <!-- Tailwind CSS CDN for styling -->
-</head>
-<style>
-    * {
+    <style>
+        * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
@@ -233,73 +231,265 @@
 
         .card {
             background: white;
-            border-radius: 6px;
-            padding: 12px;
-            margin-bottom: 10px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 14px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             border: 1px solid #e1e5eb;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
         }
 
         .card-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            gap: 10px;
         }
 
         .card-title {
             font-weight: 600;
             color: #1a6fc4;
-            font-size: 14px;
+            font-size: 15px;
+            line-height: 1.3;
             flex: 1;
-            margin-right: 10px;
         }
 
         .card-semester {
-            background: #f0f5ff;
-            color: #1a6fc4;
-            padding: 3px 8px;
-            border-radius: 10px;
-            font-size: 10px;
-            font-weight: 500;
+            background: linear-gradient(135deg, #1a6fc4 0%, #0c4a8f 100%);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
             white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .card-details {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .card-detail {
             display: flex;
-            margin-bottom: 5px;
-            font-size: 12px;
+            margin-bottom: 6px;
+            font-size: 13px;
+            align-items: center;
         }
 
         .card-label {
             color: #6c757d;
             min-width: 80px;
             font-weight: 500;
+            font-size: 12px;
         }
 
         .card-value {
             color: #333;
             flex: 1;
+            font-weight: 500;
         }
 
         /* Mobile-specific styles */
         @media (max-width: 768px) {
+            .container {
+                padding: 8px;
+            }
+            
+            header {
+                padding: 12px 10px;
+                margin-bottom: 12px;
+                border-radius: 0 0 6px 6px;
+            }
+            
+            header h1 {
+                font-size: 1.4rem;
+                margin-bottom: 4px;
+            }
+            
+            header p {
+                font-size: 0.8rem;
+            }
+            
+            .search-container {
+                padding: 12px;
+                margin-bottom: 12px;
+            }
+            
+            .search-box {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-box i {
+                margin-right: 0;
+                margin-bottom: 8px;
+                align-self: center;
+                font-size: 16px;
+            }
+            
+            .search-box input {
+                padding: 14px 12px;
+                font-size: 16px; /* Prevents zoom on iOS */
+                border-radius: 8px;
+            }
+            
+            .filters {
+                margin-top: 12px;
+                gap: 6px;
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 4px;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .filter-btn {
+                padding: 10px 14px;
+                font-size: 13px;
+                border-radius: 18px;
+                flex-shrink: 0; /* Prevents buttons from shrinking */
+            }
+            
+            .table-container {
+                margin-bottom: 12px;
+                border-radius: 6px;
+            }
+            
             .table-header {
+                padding: 10px 12px;
+                flex-direction: row;
+                align-items: center;
+            }
+            
+            .table-header h2 {
+                font-size: 1.1rem;
+                flex: 1;
+            }
+            
+            .toggle-btn {
+                padding: 8px 12px;
+                font-size: 11px;
+                border-radius: 14px;
+                white-space: nowrap;
+            }
+            
+            /* Enhanced table styling for mobile */
+            table {
+                display: block;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                white-space: nowrap;
+            }
+            
+            th, td {
+                padding: 12px 8px;
+                font-size: 13px;
+                min-width: 80px; /* Ensures columns don't get too narrow */
+            }
+            
+            th:nth-child(1), td:nth-child(1) { min-width: 70px; } /* Paper ID */
+            th:nth-child(2), td:nth-child(2) { min-width: 120px; } /* Paper Name */
+            th:nth-child(3), td:nth-child(3) { min-width: 60px; } /* Course */
+            th:nth-child(4), td:nth-child(4) { min-width: 70px; } /* Semester */
+            th:nth-child(5), td:nth-child(5) { min-width: 60px; } /* Year */
+            th:nth-child(6), td:nth-child(6) { min-width: 100px; } /* Download */
+            
+            /* Enhanced mobile card styles */
+            .card-container {
+                padding: 8px;
+            }
+
+            .card {
+                padding: 16px;
+                margin-bottom: 10px;
+                border-radius: 10px;
+            }
+
+            .card-header {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 10px;
+                gap: 8px;
+                margin-bottom: 10px;
             }
 
-            th, td {
-                padding: 8px 6px;
+            .card-title {
+                font-size: 16px;
+                line-height: 1.4;
+            }
+
+            .card-semester {
+                align-self: flex-start;
+                font-size: 12px;
+                padding: 5px 12px;
+            }
+
+            .card-detail {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 2px;
+                margin-bottom: 8px;
+            }
+
+            .card-label {
+                min-width: auto;
                 font-size: 11px;
+                color: #5a6c7d;
             }
 
-            /* Card layout for tables on mobile */
+            .card-value {
+                font-size: 14px;
+                font-weight: 600;
+            }
+
+            .download-btn {
+                padding: 12px 16px;
+                font-size: 14px;
+                min-width: 100%;
+                margin: 10px 0 0 0;
+                border-radius: 8px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 8px;
+                background: linear-gradient(135deg, #1a6fc4 0%, #0c4a8f 100%);
+                border: none;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                text-decoration: none;
+                color: white;
+                font-weight: 600;
+            }
+
+            .download-btn:hover {
+                background: linear-gradient(135deg, #0c4a8f 0%, #0a3a75 100%);
+                transform: translateY(-1px);
+                box-shadow: 0 4px 12px rgba(26, 111, 196, 0.3);
+            }
+
+            .download-btn:active {
+                transform: translateY(0);
+            }
+
+            /* Better touch targets */
+            .download-btn, .filter-btn, .toggle-btn {
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /* Improved visual feedback */
+            .download-btn:active, .filter-btn:active, .toggle-btn:active {
+                transform: scale(0.98);
+                transition: transform 0.1s ease;
+            }
+
+            /* Hide tables and show cards on mobile */
             .mobile-card-view table {
                 display: none;
             }
@@ -307,267 +497,101 @@
             .mobile-card-view .card-container {
                 display: block;
             }
+            
+            /* Desktop view classes for mobile */
+            .desktop-view table {
+                display: table;
+            }
+            
+            .desktop-view .card-container {
+                display: none;
+            }
+        }
+
+        /* Small mobile devices */
+        @media (max-width: 480px) {
+            .card-container {
+                padding: 6px;
+            }
+
+            .card {
+                padding: 14px;
+                margin-bottom: 8px;
+            }
+
+            .card-title {
+                font-size: 15px;
+            }
+
+            .card-detail {
+                margin-bottom: 6px;
+            }
+
+            .card-label {
+                font-size: 10px;
+            }
+
+            .card-value {
+                font-size: 13px;
+            }
+
+            .download-btn {
+                padding: 10px 14px;
+                font-size: 13px;
+            }
         }
 
         /* Desktop styles */
-        @media (max-width: 768px) {
-    .container {
-        padding: 8px;
-    }
-    
-    header {
-        padding: 12px 10px;
-        margin-bottom: 12px;
-        border-radius: 0 0 6px 6px;
-    }
-    
-    header h1 {
-        font-size: 1.4rem;
-        margin-bottom: 4px;
-    }
-    
-    header p {
-        font-size: 0.8rem;
-    }
-    
-    .search-container {
-        padding: 12px;
-        margin-bottom: 12px;
-    }
-    
-    .search-box {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    
-    .search-box i {
-        margin-right: 0;
-        margin-bottom: 8px;
-        align-self: center;
-        font-size: 16px;
-    }
-    
-    .search-box input {
-        padding: 14px 12px;
-        font-size: 16px; /* Prevents zoom on iOS */
-        border-radius: 8px;
-    }
-    
-    .filters {
-        margin-top: 12px;
-        gap: 6px;
-        justify-content: flex-start;
-        overflow-x: auto;
-        padding-bottom: 4px;
-        -webkit-overflow-scrolling: touch;
-    }
-    
-    .filter-btn {
-        padding: 10px 14px;
-        font-size: 13px;
-        border-radius: 18px;
-        flex-shrink: 0; /* Prevents buttons from shrinking */
-    }
-    
-    .table-container {
-        margin-bottom: 12px;
-        border-radius: 6px;
-    }
-    
-    .table-header {
-        padding: 10px 12px;
-        flex-direction: row;
-        align-items: center;
-    }
-    
-    .table-header h2 {
-        font-size: 1.1rem;
-        flex: 1;
-    }
-    
-    .toggle-btn {
-        padding: 8px 12px;
-        font-size: 11px;
-        border-radius: 14px;
-        white-space: nowrap;
-    }
-    
-    /* Enhanced table styling for mobile */
-    table {
-        display: block;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        white-space: nowrap;
-    }
-    
-    th, td {
-        padding: 12px 8px;
-        font-size: 13px;
-        min-width: 80px; /* Ensures columns don't get too narrow */
-    }
-    
-    th:nth-child(1), td:nth-child(1) { min-width: 70px; } /* Paper ID */
-    th:nth-child(2), td:nth-child(2) { min-width: 120px; } /* Paper Name */
-    th:nth-child(3), td:nth-child(3) { min-width: 60px; } /* Course */
-    th:nth-child(4), td:nth-child(4) { min-width: 70px; } /* Semester */
-    th:nth-child(5), td:nth-child(5) { min-width: 60px; } /* Year */
-    th:nth-child(6), td:nth-child(6) { min-width: 100px; } /* Download */
-    
-    /* Card layout improvements */
-    .card-container {
-        display: none;
-        padding: 8px;
-    }
-    
-    .card {
-        padding: 14px;
-        margin-bottom: 10px;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-    
-    .card-header {
-        margin-bottom: 10px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 6px;
-    }
-    
-    .card-title {
-        font-size: 15px;
-        margin-right: 0;
-    }
-    
-    .card-semester {
-        font-size: 11px;
-        padding: 4px 10px;
-        align-self: flex-start;
-    }
-    
-    .card-detail {
-        margin-bottom: 6px;
-        flex-direction: column;
-        gap: 2px;
-    }
-    
-    .card-label {
-        min-width: auto;
-        font-size: 11px;
-        color: #5a6c7d;
-    }
-    
-    .card-value {
-        font-size: 13px;
-        font-weight: 500;
-    }
-    
-    .download-btn {
-        padding: 10px 14px;
-        font-size: 13px;
-        min-width: 100%;
-        margin: 8px 0 0 0;
-        border-radius: 6px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    /* Mobile navigation improvements */
-    .table-container.mobile-card-view table {
-        display: none;
-    }
-    
-    .table-container.mobile-card-view .card-container {
-        display: block;
-    }
-    
-    /* Better touch targets */
-    .download-btn, .filter-btn, .toggle-btn {
-        min-height: 44px; /* Apple's recommended minimum touch target */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    /* Improved visual feedback for touch interactions */
-    .download-btn:active, .filter-btn:active, .toggle-btn:active {
-        transform: scale(0.98);
-        transition: transform 0.1s ease;
-    }
-    
-    /* Status bar spacing for iOS */
-    @supports (padding: max(0px)) {
-        .container {
-            padding-left: max(8px, env(safe-area-inset-left));
-            padding-right: max(8px, env(safe-area-inset-right));
-        }
-    }
-    
-    /* Hide table headers when in card view */
-    .mobile-card-view thead {
-        display: none;
-    }
-    
-    /* No results styling */
-    .no-results {
-        padding: 30px 20px;
-    }
-    
-    .no-results i {
-        font-size: 2.2rem;
-        margin-bottom: 15px;
-    }
-    
-    .no-results h3 {
-        font-size: 1.2rem;
-        margin-bottom: 8px;
-    }
-    
-    .no-results p {
-        font-size: 0.9rem;
-    }
-}
+        @media (min-width: 769px) {
+            .container {
+                max-width: 1200px;
+                padding: 20px;
+            }
 
-/* Small mobile devices */
-@media (max-width: 480px) {
-    .container {
-        padding: 6px;
-    }
-    
-    header {
-        padding: 10px 8px;
-    }
-    
-    header h1 {
-        font-size: 1.2rem;
-    }
-    
-    .search-container {
-        padding: 10px;
-    }
-    
-    .table-header {
-        padding: 8px 10px;
-    }
-    
-    .table-header h2 {
-        font-size: 1rem;
-    }
-    
-    .card {
-        padding: 12px;
-    }
-    
-    .filters {
-        gap: 4px;
-    }
-    
-    .filter-btn {
-        padding: 8px 12px;
-        font-size: 12px;
-    }
-}
-</style>
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            header p {
+                font-size: 1.1rem;
+            }
+
+            .search-box input {
+                padding: 14px 20px;
+                font-size: 16px;
+            }
+
+            .filter-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .table-header h2 {
+                font-size: 1.6rem;
+            }
+
+            .download-btn {
+                padding: 10px 20px;
+                min-width: 140px;
+                font-size: 14px;
+            }
+
+            th, td {
+                padding: 16px 20px;
+                font-size: 14px;
+            }
+            
+            /* Always show tables on desktop */
+            .mobile-card-view table {
+                display: table;
+            }
+            
+            .mobile-card-view .card-container {
+                display: none;
+            }
+        }
+    </style>
+</head>
 <body>
     
     <div class="container">
@@ -587,11 +611,12 @@
             </div>
         </div>
         
-        <div class="table-container">
+        <!-- First Year Section -->
+        <div class="table-container mobile-card-view" id="firstYearContainer">
             <div class="table-header">
                 <h2>BA 1st Year</h2>
                 <button class="toggle-btn" id="toggleFirstYear">
-                    <i class="fas fa-chevron-down"></i> Toggle Section
+                    <i class="fas fa-chevron-down"></i> Toggle View
                 </button>
             </div>
             <table id="firstYearTable">
@@ -976,13 +1001,17 @@
                     </tr>
                 </tbody>
             </table>
+            <div class="card-container" id="firstYearCards">
+                <!-- Cards will be generated by JavaScript -->
+            </div>
         </div>
         
-        <div class="table-container">
+        <!-- Second Year Section -->
+        <div class="table-container mobile-card-view" id="secondYearContainer">
             <div class="table-header">
                 <h2>BA 2nd Year</h2>
                 <button class="toggle-btn" id="toggleSecondYear">
-                    <i class="fas fa-chevron-down"></i> Toggle Section
+                    <i class="fas fa-chevron-down"></i> Toggle View
                 </button>
             </div>
             <table id="secondYearTable">
@@ -992,6 +1021,7 @@
                         <th>Paper Name</th>
                         <th>Course Name</th>
                         <th>Semester</th>
+                        <th>Year</th>
                         <th>Download</th>
                     </tr>
                 </thead>
@@ -1150,13 +1180,17 @@
                     </tr>
                 </tbody>
             </table>
+            <div class="card-container" id="secondYearCards">
+                <!-- Cards will be generated by JavaScript -->
+            </div>
         </div>
 
-        <div class="table-container">
+        <!-- Third Year Section -->
+        <div class="table-container mobile-card-view" id="thirdYearContainer">
             <div class="table-header">
                 <h2>BA 3rd Year</h2>
                 <button class="toggle-btn" id="toggleThirdYear">
-                    <i class="fas fa-chevron-down"></i> Toggle Section
+                    <i class="fas fa-chevron-down"></i> Toggle View
                 </button>
             </div>
             <table id="thirdYearTable">
@@ -1166,6 +1200,7 @@
                         <th>Paper Name</th>
                         <th>Course Name</th>
                         <th>Semester</th>
+                        <th>Year</th>
                         <th>Download</th>
                     </tr>
                 </thead>
@@ -1452,18 +1487,20 @@
                     </tr>
                 </tbody>
             </table>
+            <div class="card-container" id="thirdYearCards">
+                <!-- Cards will be generated by JavaScript -->  
+            </div>
         </div>
         
-        <div class="no-results" id="noResults">
-            <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 20px;"></i>
-            <h3>No papers found</h3>
-            <p>Try adjusting your search or filter to find what you're looking for</p>
+        <!-- No Results Message -->
+        <div class="no-results" id="noResultsMessage">
+            <i class="fas fa-exclamation-circle"></i>
+            <p>No papers found matching your criteria.</p>
         </div>
     </div>
     
-</body>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
             // Get DOM elements
             const searchInput = document.getElementById('searchInput');
             const filterButtons = document.querySelectorAll('.filter-btn');
@@ -1788,5 +1825,6 @@
                 }
             });
         });
-</script>
+    </script>
+</body>
 </html>
