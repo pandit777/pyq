@@ -29,7 +29,7 @@
         }
 
         header {
-            background: linear-gradient(135deg, #00897B 0%, #4A148C 100%);
+            background: linear-gradient(135deg, #b45309 0%, #b45309 100%);
             color: white;
             padding: 15px;
             text-align: center;
@@ -65,7 +65,7 @@
 
         .search-box i {
             font-size: 18px;
-            color: #00897B;
+            color: #b45309;
             margin-right: 10px;
         }
 
@@ -79,8 +79,8 @@
         }
 
         .search-box input:focus {
-            border-color: #00897B;
-            box-shadow: 0 0 0 2px rgba(0, 137, 123, 0.2);
+            border-color: #b45309;
+            box-shadow: 0 0 0 2px rgba(26, 111, 196, 0.2);
             outline: none;
         }
 
@@ -94,45 +94,21 @@
 
         .filter-btn {
             padding: 8px 12px;
-            background-color: #f4ecf7;
-            border: 1px solid #d7bde2;
+            background-color: #f0f5ff;
+            border: 1px solid #d0deff;
             border-radius: 20px;
             cursor: pointer;
             font-size: 12px;
             font-weight: 500;
-            color: #00897B;
+            color: #b45309;
             transition: all 0.2s ease;
             white-space: nowrap;
         }
 
         .filter-btn:hover, .filter-btn.active {
-            background-color: #00897B;
+            background-color: #b45309;
             color: white;
-            border-color: #00897B;
-        }
-
-        .course-filter {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 15px;
-            gap: 10px;
-        }
-
-        .course-filter-btn {
-            padding: 10px 20px;
-            background-color: white;
-            border: 2px solid #4A148C;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 600;
-            color: #4A148C;
-            transition: all 0.3s ease;
-        }
-
-        .course-filter-btn:hover, .course-filter-btn.active {
-            background-color: #4A148C;
-            color: white;
+            border-color: #b45309;
         }
 
         .table-container {
@@ -144,7 +120,7 @@
         }
 
         .table-header {
-            background: linear-gradient(135deg, #00897B 0%, #4A148C 100%);
+            background: linear-gradient(135deg, #b45309 0%, #b45309 100%);
             color: white;
             padding: 12px 15px;
             display: flex;
@@ -186,9 +162,9 @@
         }
 
         th {
-            background-color: #f8f9fd;
+            background-color: #f8fafd;
             font-weight: 600;
-            color: #00897B;
+            color: #b45309;
             position: sticky;
             top: 0;
         }
@@ -198,13 +174,13 @@
         }
 
         tr:hover {
-            background-color: #f4ecf7;
+            background-color: #f0f5ff;
         }
 
         .download-btn {
             display: inline-block;
             padding: 6px 10px;
-            background-color: #00897B;
+            background-color: #b45309;
             color: white;
             text-decoration: none;
             border-radius: 4px;
@@ -214,23 +190,13 @@
             text-align: center;
             min-width: 80px;
             margin: 5px 0;
+            cursor: pointer;
         }
 
         .download-btn:hover {
-            background-color: #00695C;
+            background-color: #b45309;
             transform: translateY(-1px);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .download-btn.disabled {
-            background-color: #9e9e9e;
-            cursor: not-allowed;
-        }
-
-        .download-btn.disabled:hover {
-            background-color: #9e9e9e;
-            transform: none;
-            box-shadow: none;
         }
 
         .download-btn i {
@@ -257,6 +223,63 @@
             font-size: 0.8rem;
         }
 
+        /* Card layout for mobile */
+        .card-container {
+            display: none;
+            padding: 10px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid #e1e5eb;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .card-title {
+            font-weight: 600;
+            color: #0d9488;
+            font-size: 14px;
+        }
+
+        .card-semester {
+            background: #f0f5ff;
+            color: #0d9488;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 500;
+        }
+
+        .card-details {
+            margin-bottom: 10px;
+        }
+
+        .card-detail {
+            display: flex;
+            margin-bottom: 5px;
+            font-size: 12px;
+        }
+
+        .card-label {
+            color: #6c757d;
+            min-width: 80px;
+            font-weight: 500;
+        }
+
+        .card-value {
+            color: #333;
+        }
+
         /* Mobile-specific styles */
         @media (max-width: 768px) {
             .table-header {
@@ -270,65 +293,22 @@
                 font-size: 11px;
             }
 
-            /* Card layout for tables on mobile */
+            /* Hide tables and show cards on mobile */
             .mobile-card-view table {
                 display: none;
             }
 
             .mobile-card-view .card-container {
                 display: block;
-                padding: 10px;
             }
-
-            .card {
-                background: white;
-                border-radius: 6px;
-                padding: 12px;
-                margin-bottom: 10px;
-                box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-                border: 1px solid #e1e5eb;
+            
+            /* Desktop view classes for mobile */
+            .desktop-view table {
+                display: table;
             }
-
-            .card-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: 8px;
-            }
-
-            .card-title {
-                font-weight: 600;
-                color: #00897B;
-                font-size: 14px;
-            }
-
-            .card-semester {
-                background: #f4ecf7;
-                color: #00897B;
-                padding: 3px 8px;
-                border-radius: 10px;
-                font-size: 10px;
-                font-weight: 500;
-            }
-
-            .card-details {
-                margin-bottom: 10px;
-            }
-
-            .card-detail {
-                display: flex;
-                margin-bottom: 5px;
-                font-size: 12px;
-            }
-
-            .card-label {
-                color: #6c757d;
-                min-width: 80px;
-                font-weight: 500;
-            }
-
-            .card-value {
-                color: #333;
+            
+            .desktop-view .card-container {
+                display: none;
             }
         }
 
@@ -370,6 +350,15 @@
             th, td {
                 padding: 16px 20px;
                 font-size: 14px;
+            }
+            
+            /* Always show tables on desktop */
+            .mobile-card-view table {
+                display: table;
+            }
+            
+            .mobile-card-view .card-container {
+                display: none;
             }
         }
     </style>
