@@ -374,9 +374,6 @@
         <div class="table-container mobile-card-view" id="firstYearContainer">
             <div class="table-header">
                 <h2>M.Tech 1st Year</h2>
-                <button class="toggle-btn" id="toggleFirstYear">
-                    <i class="fas fa-chevron-down"></i>
-                </button>
             </div>
             <table id="firstYearTable">
                 <thead>
@@ -449,9 +446,6 @@
         <div class="table-container mobile-card-view" id="secondYearContainer">
             <div class="table-header">
                 <h2>M.Tech 2nd Year</h2>
-                <button class="toggle-btn" id="toggleSecondYear">
-                    <i class="fas fa-chevron-down"></i>
-                </button>
             </div>
             <table id="secondYearTable">
                 <thead>
@@ -497,234 +491,161 @@
 </body>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Get DOM elements
-        const searchInput = document.getElementById('searchInput');
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        const firstYearTable = document.getElementById('firstYearTable');
-        const secondYearTable = document.getElementById('secondYearTable');
-        const toggleFirstYear = document.getElementById('toggleFirstYear');
-        const toggleSecondYear = document.getElementById('toggleSecondYear');
-        const noResultsMessage = document.getElementById('noResultsMessage');
-        const allRows = document.querySelectorAll('tbody tr');
+    // Get DOM elements
+    const searchInput = document.getElementById('searchInput');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const firstYearTable = document.getElementById('firstYearTable');
+    const secondYearTable = document.getElementById('secondYearTable');
+    const noResults = document.getElementById('noResults');
+    const allRows = document.querySelectorAll('tbody tr');
 
-        // Card containers
-        const firstYearCards = document.getElementById('firstYearCards');
-        const secondYearCards = document.getElementById('secondYearCards');
+    // Card containers
+    const firstYearCards = document.getElementById('firstYearCards');
+    const secondYearCards = document.getElementById('secondYearCards');
 
-        // Set initial state
-        let activeFilter = 'all';
+    // Set initial state
+    let activeFilter = 'all';
 
-        // Check if mobile view
-        function isMobile() {
-            return window.innerWidth <= 768;
-        }
+    // Check if mobile view
+    function isMobile() {
+        return window.innerWidth <= 768;
+    }
 
-        // Generate cards for mobile view
-        function generateCards() {
-            if (!isMobile()) {
-                // Hide all card containers in desktop view
-                firstYearCards.style.display = 'none';
-                secondYearCards.style.display = 'none';
-                return;
+    // Generate cards for mobile view
+    function generateCards() {
+        if (!isMobile()) return;
+
+        // Clear existing cards
+        firstYearCards.innerHTML = '';
+        secondYearCards.innerHTML = '';
+
+        // Generate cards for first year
+        firstYearTable.querySelectorAll('tbody tr').forEach(row => {
+            if (row.style.display !== 'none') {
+                const card = createCard(row);
+                firstYearCards.appendChild(card);
             }
+        });
 
-            // Clear existing cards
-            firstYearCards.innerHTML = '';
-            secondYearCards.innerHTML = '';
+        // Generate cards for second year
+        secondYearTable.querySelectorAll('tbody tr').forEach(row => {
+            if (row.style.display !== 'none') {
+                const card = createCard(row);
+                secondYearCards.appendChild(card);
+            }
+        });
+    }
 
-            // Generate cards for first year
-            firstYearTable.querySelectorAll('tbody tr').forEach(row => {
-                if (row.style.display !== 'none') {
-                    const card = createCard(row);
-                    firstYearCards.appendChild(card);
-                }
-            });
+    // Create a card element
+    function createCard(row) {
+        const cells = row.cells;
+        const downloadLink = cells[5].querySelector('a');
+        const isDisabled = downloadLink.classList.contains('disabled');
+        
+        const card = document.createElement('div');
+        card.className = 'card';
 
-            // Generate cards for second year
-            secondYearTable.querySelectorAll('tbody tr').forEach(row => {
-                if (row.style.display !== 'none') {
-                    const card = createCard(row);
-                    secondYearCards.appendChild(card);
-                }
-            });
-
-            // Show card containers
-            firstYearCards.style.display = 'block';
-            secondYearCards.style.display = 'block';
-        }
-
-        // Create a card element
-        function createCard(row) {
-            const cells = row.cells;
-            const card = document.createElement('div');
-            card.className = 'card';
-            
-            // Get the PDF URL from the data-pdf attribute
-            const downloadBtn = row.querySelector('.download-btn');
-            const pdfUrl = downloadBtn ? downloadBtn.getAttribute('data-pdf') : '#';
-
-            card.innerHTML = `
-                <div class="card-header">
-                    <div class="card-title">${cells[1].textContent}</div>
-                    <div class="card-semester">${cells[3].textContent} Semester</div>
+        card.innerHTML = `
+            <div class="card-header">
+                <div class="card-title">${cells[1].textContent}</div>
+                <div class="card-semester">${cells[3].textContent} Semester</div>
+            </div>
+            <div class="card-details">
+                <div class="card-detail">
+                    <span class="card-label">Paper ID:</span>
+                    <span class="card-value">${cells[0].textContent}</span>
                 </div>
-                <div class="card-details">
-                    <div class="card-detail">
-                        <span class="card-label">Paper ID:</span>
-                        <span class="card-value">${cells[0].textContent}</span>
-                    </div>
-                    <div class="card-detail">
-                        <span class="card-label">Course:</span>
-                        <span class="card-value">${cells[2].textContent}</span>
-                    </div>
-                    <div class="card-detail">
-                        <span class="card-label">Year:</span>
-                        <span class="card-value">${cells[4].textContent}</span>
-                    </div>
+                <div class="card-detail">
+                    <span class="card-label">Course:</span>
+                    <span class="card-value">${cells[2].textContent}</span>
                 </div>
-                <a data-pdf="${pdfUrl}" class="download-btn"><i class="fas fa-download"></i> Download</a>
-            `;
-            
-            // Add click handler to download button
-            const cardDownloadBtn = card.querySelector('.download-btn');
-            cardDownloadBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                const pdfUrl = this.getAttribute('data-pdf');
-                if (pdfUrl && pdfUrl !== '') {
-                    window.open(pdfUrl, '_blank');
-                } else {
-                    alert('PDF not available');
-                }
-            });
+                <div class="card-detail">
+                    <span class="card-label">Year:</span>
+                    <span class="card-value">${cells[4].textContent}</span>
+                </div>
+            </div>
+            ${isDisabled ? 
+                '<a href="#" class="download-btn disabled"><i class="fas fa-download"></i> Unavailable</a>' : 
+                `<a href="${downloadLink.href}" class="download-btn" target="_blank"><i class="fas fa-download"></i> Download</a>`
+            }
+        `;
 
-            return card;
-        }
+        return card;
+    }
 
-        // Add event listeners for search
-        searchInput.addEventListener('input', function() {
+    // Add event listeners for search
+    searchInput.addEventListener('input', function() {
+        performSearch();
+        generateCards();
+    });
+
+    // Add event listeners for filter buttons
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Update active button
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+
+            // Set active filter
+            activeFilter = this.getAttribute('data-filter');
+
+            // Perform search with current filter
             performSearch();
             generateCards();
         });
-
-        // Add event listeners for filter buttons
-        filterButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                // Update active button
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-
-                // Set active filter
-                activeFilter = this.getAttribute('data-filter');
-
-                // Perform search with current filter
-                performSearch();
-                generateCards();
-            });
-        });
-
-        // Add event listeners for toggle buttons
-        toggleFirstYear.addEventListener('click', function() {
-            const container = document.getElementById('firstYearContainer');
-            const table = container.querySelector('table');
-            const cardContainer = container.querySelector('.card-container');
-            
-            if (isMobile()) {
-                // On mobile, toggle card container
-                const isHidden = cardContainer.style.display === 'none';
-                cardContainer.style.display = isHidden ? 'block' : 'none';
-                this.querySelector('i').className = isHidden ? 'fas fa-chevron-up' : 'fas fa-chevron-down';
-            } else {
-                // On desktop, toggle table
-                const isHidden = table.style.display === 'none';
-                table.style.display = isHidden ? 'table' : 'none';
-                this.querySelector('i').className = isHidden ? 'fas fa-chevron-up' : 'fas fa-chevron-down';
-            }
-        });
-
-        toggleSecondYear.addEventListener('click', function() {
-            const container = document.getElementById('secondYearContainer');
-            const table = container.querySelector('table');
-            const cardContainer = container.querySelector('.card-container');
-            
-            if (isMobile()) {
-                // On mobile, toggle card container
-                const isHidden = cardContainer.style.display === 'none';
-                cardContainer.style.display = isHidden ? 'block' : 'none';
-                this.querySelector('i').className = isHidden ? 'fas fa-chevron-up' : 'fas fa-chevron-down';
-            } else {
-                // On desktop, toggle table
-                const isHidden = table.style.display === 'none';
-                table.style.display = isHidden ? 'table' : 'none';
-                this.querySelector('i').className = isHidden ? 'fas fa-chevron-up' : 'fas fa-chevron-down';
-            }
-        });
-
-        // Search function
-        function performSearch() {
-            const searchText = searchInput.value.toLowerCase();
-            let visibleCount = 0;
-
-            allRows.forEach(row => {
-                const paperName = row.cells[1].textContent.toLowerCase();
-                const courseName = row.cells[2].textContent.toLowerCase();
-                const semester = row.cells[3].textContent.toLowerCase();
-                const paperId = row.cells[0].textContent.toLowerCase();
-                const year = row.cells[4].textContent.toLowerCase();
-
-                // Check if row matches search text and active filter
-                const matchesSearch = paperName.includes(searchText) ||
-                                    courseName.includes(searchText) ||
-                                    semester.includes(searchText) ||
-                                    paperId.includes(searchText) ||
-                                    year.includes(searchText);
-
-                const matchesFilter = activeFilter === 'all' ||
-                                    semester.includes(activeFilter.toLowerCase());
-
-                // Show or hide row based on search and filter
-                if (matchesSearch && matchesFilter) {
-                    row.style.display = '';
-                    visibleCount++;
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-
-            // Show no results message if needed
-            noResultsMessage.style.display = visibleCount === 0 ? 'block' : 'none';
-
-            // Show/hide table headers based on visible rows
-            const firstYearHeader = firstYearTable.querySelector('thead');
-            const secondYearHeader = secondYearTable.querySelector('thead');
-
-            firstYearHeader.style.display = Array.from(firstYearTable.querySelectorAll('tbody tr'))
-                .some(row => row.style.display !== 'none') ? '' : 'none';
-
-            secondYearHeader.style.display = Array.from(secondYearTable.querySelectorAll('tbody tr'))
-                .some(row => row.style.display !== 'none') ? '' : 'none';
-        }
-
-        // Initialize download buttons
-        document.querySelectorAll('.download-btn').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                const pdfUrl = this.getAttribute('data-pdf');
-                if (pdfUrl && pdfUrl !== '') {
-                    window.open(pdfUrl, '_blank');
-                } else {
-                    alert('PDF not available');
-                }
-            });
-        });
-
-        // Initial setup
-        performSearch();
-        generateCards();
-
-        // Handle window resize
-        window.addEventListener('resize', function() {
-            generateCards();
-        });
     });
+
+    // Search function
+    function performSearch() {
+        const searchText = searchInput.value.toLowerCase();
+        let visibleCount = 0;
+
+        allRows.forEach(row => {
+            const paperName = row.cells[1].textContent.toLowerCase();
+            const course = row.cells[2].textContent.toLowerCase();
+            const semester = row.cells[3].textContent.toLowerCase();
+            const year = row.cells[4].textContent.toLowerCase();
+
+            // Check if row matches search text and active filter
+            const matchesSearch = paperName.includes(searchText) ||
+                                course.includes(searchText) ||
+                                semester.includes(searchText) ||
+                                year.includes(searchText);
+
+            const matchesFilter = activeFilter === 'all' ||
+                                semester.includes(activeFilter.toLowerCase());
+
+            // Show or hide row based on search and filter
+            if (matchesSearch && matchesFilter) {
+                row.style.display = '';
+                visibleCount++;
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        // Show no results message if needed
+        noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+
+        // Show/hide table headers based on visible rows
+        const firstYearHeader = firstYearTable.querySelector('thead');
+        const secondYearHeader = secondYearTable.querySelector('thead');
+
+        firstYearHeader.style.display = Array.from(firstYearTable.querySelectorAll('tbody tr'))
+            .some(row => row.style.display !== 'none') ? '' : 'none';
+
+        secondYearHeader.style.display = Array.from(secondYearTable.querySelectorAll('tbody tr'))
+            .some(row => row.style.display !== 'none') ? '' : 'none';
+    }
+
+    // Initial setup
+    performSearch();
+    generateCards();
+
+    // Handle window resize
+    window.addEventListener('resize', function() {
+        generateCards();
+    });
+});
 </script>
 </html>
