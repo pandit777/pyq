@@ -1562,17 +1562,27 @@
             const toggleSecondYear = document.getElementById('toggleSecondYear');
             const toggleThirdYear = document.getElementById('toggleThirdYear');
             const toggleFourthYear = document.getElementById('toggleFourthYear');
-            const noResults = document.getElementById('noResults');
-            const allRows = document.querySelectorAll('tbody tr');
-
+            const noResultsMessage = document.getElementById('noResultsMessage');
+            
             // Card containers
             const firstYearCards = document.getElementById('firstYearCards');
             const secondYearCards = document.getElementById('secondYearCards');
             const thirdYearCards = document.getElementById('thirdYearCards');
             const fourthYearCards = document.getElementById('fourthYearCards');
+            
+            // Get all table rows
+            const allRows = document.querySelectorAll('tbody tr');
 
             // Set initial state
             let activeFilter = 'all';
+            
+            // Track toggle state for each section
+            const toggleStates = {
+                firstYear: false,
+                secondYear: false,
+                thirdYear: false,
+                fourthYear: false
+            };
 
             // Check if mobile view
             function isMobile() {
@@ -1581,7 +1591,14 @@
 
             // Generate cards for mobile view
             function generateCards() {
-                if (!isMobile()) return;
+                if (!isMobile()) {
+                    // Hide all card containers in desktop view
+                    firstYearCards.style.display = 'none';
+                    secondYearCards.style.display = 'none';
+                    thirdYearCards.style.display = 'none';
+                    fourthYearCards.style.display = 'none';
+                    return;
+                }
 
                 // Clear existing cards
                 firstYearCards.innerHTML = '';
@@ -1590,8 +1607,7 @@
                 fourthYearCards.innerHTML = '';
 
                 // Generate cards for first year
-                const firstYearRows = firstYearTable.querySelectorAll('tbody tr');
-                firstYearRows.forEach(row => {
+                firstYearTable.querySelectorAll('tbody tr').forEach(row => {
                     if (row.style.display !== 'none') {
                         const card = createCard(row);
                         firstYearCards.appendChild(card);
@@ -1599,8 +1615,7 @@
                 });
 
                 // Generate cards for second year
-                const secondYearRows = secondYearTable.querySelectorAll('tbody tr');
-                secondYearRows.forEach(row => {
+                secondYearTable.querySelectorAll('tbody tr').forEach(row => {
                     if (row.style.display !== 'none') {
                         const card = createCard(row);
                         secondYearCards.appendChild(card);
@@ -1608,8 +1623,7 @@
                 });
 
                 // Generate cards for third year
-                const thirdYearRows = thirdYearTable.querySelectorAll('tbody tr');
-                thirdYearRows.forEach(row => {
+                thirdYearTable.querySelectorAll('tbody tr').forEach(row => {
                     if (row.style.display !== 'none') {
                         const card = createCard(row);
                         thirdYearCards.appendChild(card);
@@ -1617,13 +1631,17 @@
                 });
 
                 // Generate cards for fourth year
-                const fourthYearRows = fourthYearTable.querySelectorAll('tbody tr');
-                fourthYearRows.forEach(row => {
+                fourthYearTable.querySelectorAll('tbody tr').forEach(row => {
                     if (row.style.display !== 'none') {
                         const card = createCard(row);
                         fourthYearCards.appendChild(card);
                     }
                 });
+
+                // Show card containers only if they have content
+                firstYearCards.style.display = firstYearCards.children.length > 0 ? 'block' : 'none';
+                secondYearCards.style.display = secondYearCards.children.length > 0 ? 'block' : 'none';
+                thirdYearCards.style.display = thirdYearCards.children.length > 0 ? 'block' : 'none';
             }
 
             // Create a card element
@@ -1663,7 +1681,7 @@
                 cardDownloadBtn.addEventListener('click', function(e) {
                     e.preventDefault();
                     const pdfUrl = this.getAttribute('data-pdf');
-                    if (pdfUrl && pdfUrl !== '#') {
+                    if (pdfUrl && pdfUrl !== '') {
                         window.open(pdfUrl, '_blank');
                     } else {
                         alert('PDF not available');
@@ -1698,38 +1716,114 @@
             // Add event listeners for toggle buttons
             toggleFirstYear.addEventListener('click', function() {
                 const container = document.getElementById('firstYearContainer');
-                const isHidden = container.style.display === 'none';
-
-                container.style.display = isHidden ? 'block' : 'none';
-                this.querySelector('i').className = isHidden ?
-                    'fas fa-chevron-up' : 'fas fa-chevron-down';
+                toggleStates.firstYear = !toggleStates.firstYear;
+                
+                if (isMobile()) {
+                    // On mobile, toggle between table and card view
+                    if (toggleStates.firstYear) {
+                        container.classList.remove('mobile-card-view');
+                        container.classList.add('desktop-view');
+                        this.querySelector('i').className = 'fas fa-chevron-up';
+                    } else {
+                        container.classList.remove('desktop-view');
+                        container.classList.add('mobile-card-view');
+                        this.querySelector('i').className = 'fas fa-chevron-down';
+                    }
+                } else {
+                    // On desktop, just toggle the table visibility
+                    const table = container.querySelector('table');
+                    if (table.style.display === 'none') {
+                        table.style.display = 'table';
+                        this.querySelector('i').className = 'fas fa-chevron-up';
+                    } else {
+                        table.style.display = 'none';
+                        this.querySelector('i').className = 'fas fa-chevron-down';
+                    }
+                }
             });
 
             toggleSecondYear.addEventListener('click', function() {
                 const container = document.getElementById('secondYearContainer');
-                const isHidden = container.style.display === 'none';
-
-                container.style.display = isHidden ? 'block' : 'none';
-                this.querySelector('i').className = isHidden ?
-                    'fas fa-chevron-up' : 'fas fa-chevron-down';
+                toggleStates.secondYear = !toggleStates.secondYear;
+                
+                if (isMobile()) {
+                    // On mobile, toggle between table and card view
+                    if (toggleStates.secondYear) {
+                        container.classList.remove('mobile-card-view');
+                        container.classList.add('desktop-view');
+                        this.querySelector('i').className = 'fas fa-chevron-up';
+                    } else {
+                        container.classList.remove('desktop-view');
+                        container.classList.add('mobile-card-view');
+                        this.querySelector('i').className = 'fas fa-chevron-down';
+                    }
+                } else {
+                    // On desktop, just toggle the table visibility
+                    const table = container.querySelector('table');
+                    if (table.style.display === 'none') {
+                        table.style.display = 'table';
+                        this.querySelector('i').className = 'fas fa-chevron-up';
+                    } else {
+                        table.style.display = 'none';
+                        this.querySelector('i').className = 'fas fa-chevron-down';
+                    }
+                }
             });
 
             toggleThirdYear.addEventListener('click', function() {
                 const container = document.getElementById('thirdYearContainer');
-                const isHidden = container.style.display === 'none';
-
-                container.style.display = isHidden ? 'block' : 'none';
-                this.querySelector('i').className = isHidden ?
-                    'fas fa-chevron-up' : 'fas fa-chevron-down';
+                toggleStates.thirdYear = !toggleStates.thirdYear;
+                
+                if (isMobile()) {
+                    // On mobile, toggle between table and card view
+                    if (toggleStates.thirdYear) {
+                        container.classList.remove('mobile-card-view');
+                        container.classList.add('desktop-view');
+                        this.querySelector('i').className = 'fas fa-chevron-up';
+                    } else {
+                        container.classList.remove('desktop-view');
+                        container.classList.add('mobile-card-view');
+                        this.querySelector('i').className = 'fas fa-chevron-down';
+                    }
+                } else {
+                    // On desktop, just toggle the table visibility
+                    const table = container.querySelector('table');
+                    if (table.style.display === 'none') {
+                        table.style.display = 'table';
+                        this.querySelector('i').className = 'fas fa-chevron-up';
+                    } else {
+                        table.style.display = 'none';
+                        this.querySelector('i').className = 'fas fa-chevron-down';
+                    }
+                }
             });
 
-            toggleFourthYear.addEventListener('click', function() {
+            togglefourthYear.addEventListener('click', function() {
                 const container = document.getElementById('fourthYearContainer');
-                const isHidden = container.style.display === 'none';
-
-                container.style.display = isHidden ? 'block' : 'none';
-                this.querySelector('i').className = isHidden ?
-                    'fas fa-chevron-up' : 'fas fa-chevron-down';
+                toggleStates.fourthYear = !toggleStates.fourthYear;
+                
+                if (isMobile()) {
+                    // On mobile, toggle between table and card view
+                    if (toggleStates.fourthYear) {
+                        container.classList.remove('mobile-card-view');
+                        container.classList.add('desktop-view');
+                        this.querySelector('i').className = 'fas fa-chevron-up';
+                    } else {
+                        container.classList.remove('desktop-view');
+                        container.classList.add('mobile-card-view');
+                        this.querySelector('i').className = 'fas fa-chevron-down';
+                    }
+                } else {
+                    // On desktop, just toggle the table visibility
+                    const table = container.querySelector('table');
+                    if (table.style.display === 'none') {
+                        table.style.display = 'table';
+                        this.querySelector('i').className = 'fas fa-chevron-up';
+                    } else {
+                        table.style.display = 'none';
+                        this.querySelector('i').className = 'fas fa-chevron-down';
+                    }
+                }
             });
 
             // Search function
@@ -1742,12 +1836,14 @@
                     const courseName = row.cells[2].textContent.toLowerCase();
                     const semester = row.cells[3].textContent.toLowerCase();
                     const paperId = row.cells[0].textContent.toLowerCase();
+                    const year = row.cells[4].textContent.toLowerCase();
 
                     // Check if row matches search text and active filter
                     const matchesSearch = paperName.includes(searchText) ||
                                         courseName.includes(searchText) ||
                                         semester.includes(searchText) ||
-                                        paperId.includes(searchText);
+                                        paperId.includes(searchText) ||
+                                        year.includes(searchText);
 
                     const matchesFilter = activeFilter === 'all' ||
                                         semester.includes(activeFilter.toLowerCase());
@@ -1762,7 +1858,7 @@
                 });
 
                 // Show no results message if needed
-                noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+                noResultsMessage.style.display = visibleCount === 0 ? 'block' : 'none';
 
                 // Show/hide table headers based on visible rows
                 const firstYearHeader = firstYearTable.querySelector('thead');
@@ -1788,7 +1884,7 @@
                 button.addEventListener('click', function(e) {
                     e.preventDefault();
                     const pdfUrl = this.getAttribute('data-pdf');
-                    if (pdfUrl && pdfUrl !== '#') {
+                    if (pdfUrl && pdfUrl !== '') {
                         window.open(pdfUrl, '_blank');
                     } else {
                         alert('PDF not available');
@@ -1803,6 +1899,27 @@
             // Handle window resize
             window.addEventListener('resize', function() {
                 generateCards();
+                
+                // Reset toggle states on resize
+                if (!isMobile()) {
+                    // On desktop, ensure tables are visible
+                    document.querySelectorAll('.table-container').forEach(container => {
+                        container.classList.remove('desktop-view');
+                        container.classList.add('mobile-card-view');
+                        container.querySelector('table').style.display = 'table';
+                    });
+                    
+                    // Reset toggle icons
+                    document.querySelectorAll('.toggle-btn i').forEach(icon => {
+                        icon.className = 'fas fa-chevron-down';
+                    });
+                    
+                    // Reset toggle states
+                    toggleStates.firstYear = false;
+                    toggleStates.secondYear = false;
+                    toggleStates.thirdYear = false;
+                    toggleStates.fourthYear = false;
+                }
             });
         });
     </script>
