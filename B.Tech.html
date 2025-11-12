@@ -57,20 +57,23 @@
         }
 
         .search-box {
-            display: flex;
-            align-items: center;
+            position: relative;
             max-width: 100%;
             margin: 0 auto;
         }
 
         .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
             font-size: 18px;
-            color: #1a6fc4;
-            margin-right: 10px;
+            color: #6c757d;
+            z-index: 2;
         }
 
         .search-box input {
-            padding: 12px 15px;
+            padding: 12px 15px 12px 45px;
             width: 100%;
             border: 2px solid #e1e5eb;
             border-radius: 6px;
@@ -328,7 +331,7 @@
             }
 
             .search-box input {
-                padding: 14px 20px;
+                padding: 14px 20px 14px 50px;
                 font-size: 16px;
             }
 
@@ -387,6 +390,7 @@
         <div class="table-container mobile-card-view" id="firstYearContainer">
             <div class="table-header">
                 <h2>B.Tech 1st Year</h2>
+                <button class="toggle-btn" id="toggleFirstYear"><i class="fas fa-chevron-down"></i></button>
             </div>
             <table id="firstYearTable">
                 <thead>
@@ -400,6 +404,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- First Year rows here -->
                     <tr>
                         <td>12477</td>
                         <td>Basic Electrical Engineering</td>
@@ -552,6 +557,7 @@
                         <td>2025</td>
                         <td><a data-pdf="https://drive.google.com/file/d/1V7WxNkNCpsThBAPbTaY7KBsLnZNbWKwk/view" class="download-btn"><i class="fas fa-download"></i> Download</a></td>
                     </tr>
+                    <!-- Add other first year rows -->
                 </tbody>
             </table>
 
@@ -564,6 +570,7 @@
         <div class="table-container mobile-card-view" id="secondYearContainer">
             <div class="table-header">
                 <h2>B.Tech 2nd Year</h2>
+                <button class="toggle-btn" id="toggleSecondYear"><i class="fas fa-chevron-down"></i></button>
             </div>
             <table id="secondYearTable">
                 <thead>
@@ -577,6 +584,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- Second Year rows here -->
                     <tr>
                         <td>32768</td>
                         <td>Electric Circuit Analysis</td>
@@ -1026,6 +1034,7 @@
                         <td>2025</td>
                         <td><a data-pdf="https://drive.google.com/file/d/1zQS9_ItPr13iE6usJZZDg_biKRyK6vMB/view?usp=drive_link" class="download-btn"><i class="fas fa-download"></i> Download</a></td>
                     </tr>
+                    <!-- Add other second year rows -->
                 </tbody>
             </table>
 
@@ -1038,6 +1047,7 @@
         <div class="table-container mobile-card-view" id="thirdYearContainer">
             <div class="table-header">
                 <h2>B.Tech 3rd Year</h2>
+                <button class="toggle-btn" id="toggleThirdYear"><i class="fas fa-chevron-down"></i></button>
             </div>
             <table id="thirdYearTable">
                 <thead>
@@ -1051,6 +1061,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- Third Year rows here -->
                     <tr>
                         <td>24166 or 24268</td>
                         <td>Multi Media Technology</td>
@@ -1347,6 +1358,7 @@
                         <th>2025</th>
                         <td><a data-pdf="https://drive.google.com/file/d/191Q18a6wiN4nrztEFNAuA98HK3bq3LHX/view?usp=drive_link" class="download-btn"><i class="fas fa-download"></i> Download</a></td>
                     </tr>
+                    <!-- Add other third year rows -->
                 </tbody>
             </table>
 
@@ -1359,6 +1371,7 @@
         <div class="table-container mobile-card-view" id="fourthYearContainer">
             <div class="table-header">
                 <h2>B.Tech 4th Year</h2>
+                <button class="toggle-btn" id="toggleFourthYear"><i class="fas fa-chevron-down"></i></button>
             </div>
             <table id="fourthYearTable">
                 <thead>
@@ -1372,6 +1385,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- Fourth Year rows here -->
                     <tr>
                         <td>72461</td>
                         <td>Advanced Computer Architecture</td>
@@ -1532,6 +1546,7 @@
                         <th>2024</th>
                         <td><a data-pdf="https://drive.google.com/file/d/1KVxAQ7zrqN_4JBDujmOp419PDW0uwnXE/view?usp=drive_link" class="download-btn"><i class="fas fa-download"></i> Download</a></td>
                     </tr>
+                    <!-- Add other fourth year rows -->
                 </tbody>
             </table>
 
@@ -1556,6 +1571,10 @@
             const secondYearTable = document.getElementById('secondYearTable');
             const thirdYearTable = document.getElementById('thirdYearTable');
             const fourthYearTable = document.getElementById('fourthYearTable');
+            const toggleFirstYear = document.getElementById('toggleFirstYear');
+            const toggleSecondYear = document.getElementById('toggleSecondYear');
+            const toggleThirdYear = document.getElementById('toggleThirdYear');
+            const toggleFourthYear = document.getElementById('toggleFourthYear');
             const noResultsMessage = document.getElementById('noResults');
             
             // Card containers
@@ -1564,20 +1583,52 @@
             const thirdYearCards = document.getElementById('thirdYearCards');
             const fourthYearCards = document.getElementById('fourthYearCards');
             
-            // Get all table rows from all tables
-            const allRows = [
-                ...firstYearTable.querySelectorAll('tbody tr'),
-                ...secondYearTable.querySelectorAll('tbody tr'),
-                ...thirdYearTable.querySelectorAll('tbody tr'),
-                ...fourthYearTable.querySelectorAll('tbody tr')
-            ];
+            // Get all table rows
+            const allRows = document.querySelectorAll('tbody tr');
 
             // Set initial state
             let activeFilter = 'all';
+            
+            // Track toggle state for each section
+            const toggleStates = {
+                firstYear: false,
+                secondYear: false,
+                thirdYear: false,
+                fourthYear: false
+            };
 
             // Check if mobile view
             function isMobile() {
                 return window.innerWidth <= 768;
+            }
+
+            // Initialize toggle states based on current view
+            function initializeToggleStates() {
+                if (isMobile()) {
+                    // Mobile view starts with card view (collapsed)
+                    toggleStates.firstYear = false;
+                    toggleStates.secondYear = false;
+                    toggleStates.thirdYear = false;
+                    toggleStates.fourthYear = false;
+                    
+                    // Set initial icons for mobile
+                    toggleFirstYear.querySelector('i').className = 'fas fa-chevron-down';
+                    toggleSecondYear.querySelector('i').className = 'fas fa-chevron-down';
+                    toggleThirdYear.querySelector('i').className = 'fas fa-chevron-down';
+                    toggleFourthYear.querySelector('i').className = 'fas fa-chevron-down';
+                } else {
+                    // Desktop view starts with tables visible
+                    toggleStates.firstYear = true;
+                    toggleStates.secondYear = true;
+                    toggleStates.thirdYear = true;
+                    toggleStates.fourthYear = true;
+                    
+                    // Set initial icons for desktop
+                    toggleFirstYear.querySelector('i').className = 'fas fa-chevron-up';
+                    toggleSecondYear.querySelector('i').className = 'fas fa-chevron-up';
+                    toggleThirdYear.querySelector('i').className = 'fas fa-chevron-up';
+                    toggleFourthYear.querySelector('i').className = 'fas fa-chevron-up';
+                }
             }
 
             // Generate cards for mobile view
@@ -1589,11 +1640,11 @@
                     thirdYearCards.style.display = 'none';
                     fourthYearCards.style.display = 'none';
                     
-                    // Show tables in desktop view
-                    firstYearTable.style.display = '';
-                    secondYearTable.style.display = '';
-                    thirdYearTable.style.display = '';
-                    fourthYearTable.style.display = '';
+                    // Show all tables in desktop view
+                    firstYearTable.style.display = 'table';
+                    secondYearTable.style.display = 'table';
+                    thirdYearTable.style.display = 'table';
+                    fourthYearTable.style.display = 'table';
                     return;
                 }
 
@@ -1604,62 +1655,42 @@
                 fourthYearCards.innerHTML = '';
 
                 // Generate cards for first year
-                let firstYearVisible = false;
                 firstYearTable.querySelectorAll('tbody tr').forEach(row => {
                     if (row.style.display !== 'none') {
                         const card = createCard(row);
                         firstYearCards.appendChild(card);
-                        firstYearVisible = true;
                     }
                 });
 
                 // Generate cards for second year
-                let secondYearVisible = false;
                 secondYearTable.querySelectorAll('tbody tr').forEach(row => {
                     if (row.style.display !== 'none') {
                         const card = createCard(row);
                         secondYearCards.appendChild(card);
-                        secondYearVisible = true;
                     }
                 });
 
                 // Generate cards for third year
-                let thirdYearVisible = false;
                 thirdYearTable.querySelectorAll('tbody tr').forEach(row => {
                     if (row.style.display !== 'none') {
                         const card = createCard(row);
                         thirdYearCards.appendChild(card);
-                        thirdYearVisible = true;
                     }
                 });
 
                 // Generate cards for fourth year
-                let fourthYearVisible = false;
                 fourthYearTable.querySelectorAll('tbody tr').forEach(row => {
                     if (row.style.display !== 'none') {
                         const card = createCard(row);
                         fourthYearCards.appendChild(card);
-                        fourthYearVisible = true;
                     }
                 });
 
-                // Show/hide table headers based on content
-                document.querySelector('#firstYearContainer .table-header').style.display = firstYearVisible ? 'flex' : 'none';
-                document.querySelector('#secondYearContainer .table-header').style.display = secondYearVisible ? 'flex' : 'none';
-                document.querySelector('#thirdYearContainer .table-header').style.display = thirdYearVisible ? 'flex' : 'none';
-                document.querySelector('#fourthYearContainer .table-header').style.display = fourthYearVisible ? 'flex' : 'none';
-
-                // Hide tables and show cards in mobile view
-                firstYearTable.style.display = 'none';
-                secondYearTable.style.display = 'none';
-                thirdYearTable.style.display = 'none';
-                fourthYearTable.style.display = 'none';
-
-                // Show card containers
-                firstYearCards.style.display = 'block';
-                secondYearCards.style.display = 'block';
-                thirdYearCards.style.display = 'block';
-                fourthYearCards.style.display = 'block';
+                // Show card containers only if they have content
+                firstYearCards.style.display = firstYearCards.children.length > 0 ? 'block' : 'none';
+                secondYearCards.style.display = secondYearCards.children.length > 0 ? 'block' : 'none';
+                thirdYearCards.style.display = thirdYearCards.children.length > 0 ? 'block' : 'none';
+                fourthYearCards.style.display = fourthYearCards.children.length > 0 ? 'block' : 'none';
             }
 
             // Create a card element
@@ -1709,6 +1740,41 @@
                 return card;
             }
 
+            // Toggle section visibility
+            function toggleSection(section, toggleButton, toggleState) {
+                const container = document.getElementById(section + 'Container');
+                const table = document.getElementById(section + 'Table');
+                const cards = document.getElementById(section + 'Cards');
+                
+                if (isMobile()) {
+                    // Mobile view: toggle between table and card view
+                    if (toggleState) {
+                        // Show table view
+                        if (table) table.style.display = 'table';
+                        if (cards) cards.style.display = 'none';
+                        toggleButton.querySelector('i').className = 'fas fa-chevron-up';
+                    } else {
+                        // Show card view
+                        if (table) table.style.display = 'none';
+                        if (cards) cards.style.display = 'block';
+                        toggleButton.querySelector('i').className = 'fas fa-chevron-down';
+                    }
+                } else {
+                    // Desktop view: toggle table visibility
+                    if (toggleState) {
+                        // Show table
+                        if (table) table.style.display = 'table';
+                        toggleButton.querySelector('i').className = 'fas fa-chevron-up';
+                    } else {
+                        // Hide table
+                        if (table) table.style.display = 'none';
+                        toggleButton.querySelector('i').className = 'fas fa-chevron-down';
+                    }
+                    // Always hide cards in desktop view
+                    if (cards) cards.style.display = 'none';
+                }
+            }
+
             // Add event listeners for search
             searchInput.addEventListener('input', function() {
                 performSearch();
@@ -1731,10 +1797,31 @@
                 });
             });
 
+            // Add event listeners for toggle buttons
+            toggleFirstYear.addEventListener('click', function() {
+                toggleStates.firstYear = !toggleStates.firstYear;
+                toggleSection('firstYear', this, toggleStates.firstYear);
+            });
+
+            toggleSecondYear.addEventListener('click', function() {
+                toggleStates.secondYear = !toggleStates.secondYear;
+                toggleSection('secondYear', this, toggleStates.secondYear);
+            });
+
+            toggleThirdYear.addEventListener('click', function() {
+                toggleStates.thirdYear = !toggleStates.thirdYear;
+                toggleSection('thirdYear', this, toggleStates.thirdYear);
+            });
+
+            toggleFourthYear.addEventListener('click', function() {
+                toggleStates.fourthYear = !toggleStates.fourthYear;
+                toggleSection('fourthYear', this, toggleStates.fourthYear);
+            });
+
             // Search function
             function performSearch() {
                 const searchText = searchInput.value.toLowerCase();
-                let totalVisibleCount = 0;
+                let visibleCount = 0;
 
                 allRows.forEach(row => {
                     const paperName = row.cells[1].textContent.toLowerCase();
@@ -1756,17 +1843,28 @@
                     // Show or hide row based on search and filter
                     if (matchesSearch && matchesFilter) {
                         row.style.display = '';
-                        totalVisibleCount++;
+                        visibleCount++;
                     } else {
                         row.style.display = 'none';
                     }
                 });
 
                 // Show no results message if needed
-                noResultsMessage.style.display = totalVisibleCount === 0 ? 'block' : 'none';
+                noResultsMessage.style.display = visibleCount === 0 ? 'block' : 'none';
+
+                // Show/hide table headers based on visible rows
+                const tables = [firstYearTable, secondYearTable, thirdYearTable, fourthYearTable];
+                tables.forEach(table => {
+                    if (table) {
+                        const header = table.querySelector('thead');
+                        const hasVisibleRows = Array.from(table.querySelectorAll('tbody tr'))
+                            .some(row => row.style.display !== 'none');
+                        header.style.display = hasVisibleRows ? '' : 'none';
+                    }
+                });
             }
 
-            // Initialize download buttons for table view
+            // Initialize download buttons
             document.querySelectorAll('.download-btn').forEach(button => {
                 button.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -1780,12 +1878,27 @@
             });
 
             // Initial setup
+            initializeToggleStates();
             performSearch();
             generateCards();
 
+            // Apply initial toggle states
+            toggleSection('firstYear', toggleFirstYear, toggleStates.firstYear);
+            toggleSection('secondYear', toggleSecondYear, toggleStates.secondYear);
+            toggleSection('thirdYear', toggleThirdYear, toggleStates.thirdYear);
+            toggleSection('fourthYear', toggleFourthYear, toggleStates.fourthYear);
+
             // Handle window resize
             window.addEventListener('resize', function() {
+                // Reinitialize toggle states on resize
+                initializeToggleStates();
                 generateCards();
+                
+                // Reapply toggle states after resize
+                toggleSection('firstYear', toggleFirstYear, toggleStates.firstYear);
+                toggleSection('secondYear', toggleSecondYear, toggleStates.secondYear);
+                toggleSection('thirdYear', toggleThirdYear, toggleStates.thirdYear);
+                toggleSection('fourthYear', toggleFourthYear, toggleStates.fourthYear);
             });
         });
     </script>
