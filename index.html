@@ -177,6 +177,9 @@
       transition: all 0.4s ease;
       max-width: 280px;
       width: 100%;
+      text-align: center;
+      padding: 20px;
+      background: white;
     }
 
     .team-image-card:hover {
@@ -185,11 +188,16 @@
     }
 
     .team-image {
-      width: 100%;
-      height: 300px;
+      width: 200px;
+      height: 200px;
       object-fit: cover;
       display: block;
       transition: transform 0.4s ease;
+      /* Round images for team members */
+      border-radius: 50%;
+      margin: 0 auto 15px;
+      border: 5px solid var(--primary);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     }
 
     .team-image-card:hover .team-image {
@@ -205,11 +213,13 @@
       color: white;
       padding: 1.5rem 1rem 1rem;
       transform: translateY(100%);
-      transition: transform 0.4s ease;
+      transition: transform 1.3s ease, opacity 1.9s ease;
+      opacity: 0;
     }
 
     .team-image-card:hover .image-overlay {
       transform: translateY(0);
+      opacity: 1;
     }
 
     .image-title {
@@ -221,6 +231,10 @@
     .image-role {
       font-size: 0.9rem;
       opacity: 0.9;
+    }
+
+    .team-image-card:hover .default-name {
+      opacity: 0;
     }
 
     /* Mobile-specific styles */
@@ -315,7 +329,8 @@
       }
       
       .team-image {
-        height: 250px;
+        height: 180px;
+        width: 180px;
       }
     }
 
@@ -334,7 +349,8 @@
       }
       
       .team-image {
-        height: 220px;
+        height: 160px;
+        width: 160px;
       }
     }
   </style>
@@ -355,7 +371,7 @@
     
     <nav>
       <ul>
-        <li><a href="https://pandit777.github.io/pyq/">Home</a></li>
+        <li><a href="https://pandit777.github.io/PYQ/">Home</a></li>
         <li><a href="Course.html">Courses</a></li>
         <li><a href="About.html">About Us</a></li>
         <li><a href="Contact.html">Contact</a></li>
@@ -364,7 +380,7 @@
     
     <div class="mobile-nav" id="mobileNav">
       <ul>
-        <li><a href="https://pandit777.github.io/pyq/">Home</a></li>
+        <li><a href="https://pandit777.github.io/PYQ/">Home</a></li>
         <li><a href="Course.html">Courses</a></li>
         <li><a href="About.html">About Us</a></li>
         <li><a href="Contact.html">Contact</a></li>
@@ -403,7 +419,7 @@
       <!-- Enhanced Developer and Editor Images -->
       <div class="team-images-container">
         <div class="team-image-card">
-          <img src="https://pandit777.github.io/pyq/Dev.jpeg" alt="Developer Image" class="team-image">
+          <img src="https://pandit777.github.io/pyq/Dev.jpg" alt="Developer Image" class="team-image">
           <div class="image-overlay">
             <div class="image-title">Gourav Sharma</div>
             <div class="image-role">Developer & Founder</div>
@@ -411,7 +427,7 @@
         </div>
         
         <div class="team-image-card">
-          <img src="https://pandit777.github.io/pyq/Edit.jpeg" alt="Editor Image" class="team-image">
+          <img src="https://pandit777.github.io/pyq/Edit.jpg" alt="Editor Image" class="team-image">
           <div class="image-overlay">
             <div class="image-title">Mahesh Verma</div>
             <div class="image-role">Content Manager</div>
