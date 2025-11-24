@@ -14,6 +14,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
   <style>
     :root {
       --primary: #4c8cae;
@@ -46,7 +49,7 @@
       display: flex;
       align-items: flex;
       justify-content: center;
-      background-color: #1a237e;
+      background-color: #fff;
       position: relative;
     }
 
@@ -62,6 +65,7 @@
       padding: 10px;
       font-weight: bold;
       font-size: 1.2rem;
+      width: 100%;
     }
 
     nav {
@@ -114,6 +118,83 @@
       animation: fadeIn 0.8s ease-out;
     }
 
+    /* Mobile-specific styles */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      z-index: 100;
+      background-color: rgba(0,0,0,0.5);
+      border-radius: 4px;
+      padding: 5px 10px;
+    }
+
+    .mobile-nav {
+      display: none;
+      background-color: #285b53;
+      padding: 1rem;
+    }
+
+    .mobile-nav ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .mobile-nav ul li {
+      margin: 10px 0;
+    }
+
+    .mobile-nav ul li a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      padding: 10px;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+
+    .mobile-nav ul li a:hover {
+      background-color: #283593;
+    }
+
+    /* Mobile responsive adjustments */
+    @media (max-width: 768px) {
+      .header-image { 
+        height: auto;
+        min-height: 150px;
+      }
+      
+      nav ul { 
+        display: none; 
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      marquee {
+        font-size: 1rem;
+        padding: 8px;
+      }
+      
+      footer {
+        padding: 1rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .welcome-section {
+        padding: 1rem;
+      }
+    }
+
     .about-section {
       background: white;
       border-radius: 16px;
@@ -141,31 +222,45 @@
       color: var(--primary);
       font-weight: 600;
     }
-
-    @media (max-width: 768px) {
-      .header-image { height: 200px; }
-      nav ul { flex-direction: column; align-items: center; }
-      nav ul li { margin: 5px 0; }
-    }
   </style>
 </head>
 <body>
 
   <header>
     <div class="header-image">
-      <img src="https://image2url.com/images/1762095118035-e836127f-fdf8-449e-8036-4e4e6e8a1925.jpg" alt="University Header Image">
+      <img src="https://image2url.com/images/1762095118035-e836127f-fdf8-449e-8036-4e4e6e8a1925.jpg" alt="Indira Gandhi University Header">
+      <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <i class="fas fa-bars"></i>
+      </button>
     </div>
+    
     <marquee behavior="scroll" direction="left" scrollamount="6">
       Welcome to the IGU PYQ Portal - Your Gateway to Academic Excellence!
     </marquee>
+    
     <nav>
       <ul>
         <li><a href="https://pandit777.github.io/pyq/">Home</a></li>
         <li><a href="Course.html">Courses</a></li>
-        <li><a href="About.html">About Us</a></li>
+        <li><a href="About.html" class="active">About Us</a></li>
         <li><a href="Contact.html">Contact</a></li>
+        <li><a href="https://igu.ac.in/iguacademic?show=3">Syllabus</a></li>
+        <!-- Explore Button Added Here -->
+        <li><a href="Course.html" class="explore-nav-btn" style="background-color: #ffc107; color: #333; font-weight: bold; padding: 8px 20px; border-radius: 4px; transition: all 0.3s;">Explore PYQs</a></li>
       </ul>
     </nav>
+    
+    <div class="mobile-nav" id="mobileNav">
+      <ul>
+        <li><a href="https://pandit777.github.io/pyq/">Home</a></li>
+        <li><a href="Course.html">Courses</a></li>
+        <li><a href="About.html" class="active">About Us</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+        <li><a href="https://igu.ac.in/iguacademic?show=3">Syllabus</a></li>
+        <!-- Explore Button Added Here for Mobile -->
+        <li><a href="Course.html" class="explore-nav-btn" style="display: block; text-align: center; margin-top: 10px; background-color: #ffc107; color: #333; font-weight: bold; padding: 10px; border-radius: 4px;">Explore PYQs</a></li>
+      </ul>
+    </div>
   </header>
 
   <main class="container mx-auto p-4 md:p-6 flex flex-col items-center">
@@ -176,14 +271,14 @@
         <span class="highlight">IGU PYQ</span> is a student-driven initiative created to help Indira Gandhi University (Meerpur) students access previous year question papers (PYQs) for all programs — undergraduate, postgraduate, and research — in one organized place.
       </p>
       <p class="text-gray-700 leading-relaxed mt-4">
-        We aim to simplify the process of finding study materials and provide a digital space for academic preparation that’s fast, free, and reliable.
+        We aim to simplify the process of finding study materials and provide a digital space for academic preparation that's fast, free, and reliable.
       </p>
     </section>
 
     <section class="about-section max-w-4xl mt-8">
       <h2 class="section-title">🎯 Our Vision & Mission</h2>
       <ul class="list-disc pl-6 text-gray-700 space-y-2">
-        <li>To make IGU students’ learning experience more efficient and accessible.</li>
+        <li>To make IGU students' learning experience more efficient and accessible.</li>
         <li>To create a centralized platform for all course-related PYQs and resources.</li>
         <li>To promote smart and digital learning within the IGU community.</li>
         <li>To ensure that every student can access the right materials without any cost.</li>
@@ -195,7 +290,8 @@
       <p class="text-gray-700">
         The <span class="highlight">IGU PYQ Portal</span> is developed and maintained by passionate students and tech enthusiasts from IGU who believe in open access to education.  
         <br><br>
-        <strong>Website Developer:</strong> Gourav  
+        <strong>Website Developer:</strong> Gourav Sharma<br>
+        <strong>Content Curator:</strong> IGU Student Community<br> 
         <br>
         <strong>Goal:</strong> To make quality study materials available to every student in a clean, modern, and user-friendly interface.
       </p>
@@ -204,8 +300,35 @@
   </main>
 
   <footer>
-    &copy; 2025 IGU PYQ Portal | Designed by Gourav
+    &copy; 2025 IGU PYQ Portal | Designed by Gourav Sharma
   </footer>
+
+  <script>
+    // Mobile menu toggle functionality
+    document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+      const mobileNav = document.getElementById('mobileNav');
+      const icon = this.querySelector('i');
+      
+      if (mobileNav.style.display === 'block') {
+        mobileNav.style.display = 'none';
+        icon.className = 'fas fa-bars';
+      } else {
+        mobileNav.style.display = 'block';
+        icon.className = 'fas fa-times';
+      }
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const mobileNav = document.getElementById('mobileNav');
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      
+      if (!mobileNav.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
+        mobileNav.style.display = 'none';
+        mobileMenuBtn.querySelector('i').className = 'fas fa-bars';
+      }
+    });
+  </script>
 
 </body>
 </html>
