@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Us - IGU PYQ</title>
+  <title>Contact Us - IGU PYQ</title>
   <link data-default-icon="https://tse3.mm.bing.net/th/id/OIP.z_fzg6Mzca-JYwBcFMihTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" rel="icon" sizes="192x192" href="https://tse3.mm.bing.net/th/id/OIP.z_fzg6Mzca-JYwBcFMihTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" />
   
   <!-- Tailwind CSS CDN -->
@@ -14,12 +14,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
   <style>
     :root {
       --primary: #4c8cae;
       --primary-dark: #3a6d8a;
       --secondary: #f8f9fa;
-      --accent: #e63946;
+      --accent: #ffc107;
       --text: #2d3748;
       --text-light: #718096;
     }
@@ -42,7 +45,6 @@
 
     .header-image {
       width: 100%;
-      height: 100px;
       overflow: hidden;
       display: flex;
       align-items: flex;
@@ -53,16 +55,17 @@
 
     .header-image img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
+      display: block;
     }
 
     marquee {
-      background: #ffc107;
+      background: var(--accent);
       color: #333;
       padding: 10px;
       font-weight: bold;
       font-size: 1.2rem;
+      width: 100%;
     }
 
     nav {
@@ -106,16 +109,16 @@
       background-color: #285b53;
     }
 
+    main {
+      animation: fadeIn 0.8s ease-out;
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    main {
-      animation: fadeIn 0.8s ease-out;
-    }
-
-    .about-section {
+    .contact-section {
       background: white;
       border-radius: 16px;
       padding: 2rem;
@@ -125,7 +128,7 @@
       transition: all 0.3s ease;
     }
 
-    .about-section:hover {
+    .contact-section:hover {
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
       transform: translateY(-3px);
     }
@@ -134,19 +137,293 @@
       font-size: 2rem;
       font-weight: 700;
       color: var(--primary-dark);
-      margin-bottom: 1rem;
       text-align: center;
+      margin-bottom: 1.5rem;
     }
 
-    .highlight {
-      color: var(--primary);
+    /* IGU Official Link Styles */
+    .igu-official-link {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      z-index: 100;
+    }
+
+    .igu-btn {
+      background: linear-gradient(135deg, #ff6b35, #f7931e);
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+      transition: all 0.3s ease;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .igu-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+      background: linear-gradient(135deg, #f7931e, #ff6b35);
+    }
+
+    .igu-btn i {
+      font-size: 1.1rem;
+    }
+
+    /* Success Modal Styles */
+    .success-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .success-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      animation: modalFadeIn 0.5s ease-out;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .success-icon {
+      font-size: 4rem;
+      color: #10B981;
+      margin-bottom: 1rem;
+    }
+
+    .continue-btn {
+      background: #3B82F6;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
       font-weight: 600;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: background 0.3s;
     }
 
+    .continue-btn:hover {
+      background: #2563EB;
+    }
+
+    /* Form Overlay Styles */
+    .form-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(5px);
+    }
+
+    .form-container {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      max-width: 600px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      animation: modalFadeIn 0.5s ease-out;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #6B7280;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .close-btn:hover {
+      color: #374151;
+    }
+
+    .query-btn {
+      background: linear-gradient(135deg, #3B82F6, #1D4ED8);
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 2rem auto;
+    }
+
+    .query-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+    }
+
+    /* Mobile-specific styles */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      z-index: 100;
+      background-color: rgba(0,0,0,0.5);
+      border-radius: 4px;
+      padding: 5px 10px;
+    }
+
+    .mobile-nav {
+      display: none;
+      background-color: #285b53;
+      padding: 1rem;
+    }
+
+    .mobile-nav ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .mobile-nav ul li {
+      margin: 10px 0;
+    }
+
+    .mobile-nav ul li a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      padding: 10px;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+
+    .mobile-nav ul li a:hover {
+      background-color: #283593;
+    }
+
+    /* Mobile responsive adjustments */
     @media (max-width: 768px) {
-      .header-image { height: 200px; }
-      nav ul { flex-direction: column; align-items: center; }
-      nav ul li { margin: 5px 0; }
+      .header-image { 
+        height: auto;
+        min-height: 150px;
+      }
+      
+      nav ul { 
+        display: none; 
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      .section-title {
+        font-size: 1.6rem;
+      }
+      
+      .contact-section {
+        padding: 1.5rem;
+        margin-top: 1rem;
+      }
+      
+      .form-container {
+        padding: 1.5rem;
+        margin: 1rem;
+      }
+      
+      marquee {
+        font-size: 1rem;
+        padding: 8px;
+      }
+      
+      footer {
+        padding: 1rem;
+        font-size: 0.9rem;
+      }
+      
+      form input, form textarea {
+        font-size: 16px; /* Prevents zoom on iOS */
+      }
+      
+      .query-btn {
+        padding: 12px 24px;
+        font-size: 1rem;
+        margin: 1.5rem auto;
+      }
+      
+      .igu-official-link {
+        top: 10px;
+        left: 10px;
+      }
+      
+      .igu-btn {
+        padding: 8px 16px;
+        font-size: 0.8rem;
+      }
+      
+      .igu-btn i {
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .section-title {
+        font-size: 1.4rem;
+      }
+      
+      .contact-section {
+        padding: 1rem;
+      }
+      
+      .form-container {
+        padding: 1rem;
+      }
+      
+      form button {
+        padding: 12px !important;
+        font-size: 1rem;
+      }
+      
+      .igu-btn {
+        padding: 6px 12px;
+        font-size: 0.7rem;
+      }
     }
   </style>
 </head>
@@ -154,59 +431,269 @@
 
   <header>
     <div class="header-image">
-      <img src="https://image2url.com/images/1762095118035-e836127f-fdf8-449e-8036-4e4e6e8a1925.jpg" alt="University Header Image">
+      <img src="https://image2url.com/images/1762095118035-e836127f-fdf8-449e-8036-4e4e6e8a1925.jpg" alt="Indira Gandhi University Header">
+      <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <i class="fas fa-bars"></i>
+      </button>
     </div>
+    
     <marquee behavior="scroll" direction="left" scrollamount="6">
-      Welcome to the IGU PYQ Portal - Your Gateway to Academic Excellence!
+      Get in touch with us — We'd love to hear from you! | Official IGU Website: <a href="https://igu.ac.in" target="_blank" style="color: #1a237e; text-decoration: underline; margin-left: 10px;">igu.ac.in</a>
     </marquee>
+    
     <nav>
       <ul>
         <li><a href="https://pandit777.github.io/pyq/">Home</a></li>
         <li><a href="Course.html">Courses</a></li>
         <li><a href="About.html">About Us</a></li>
         <li><a href="Contact.html">Contact</a></li>
+        <li><a href="https://igu.ac.in/iguacademic?show=3">Syllabus</a></li>
       </ul>
     </nav>
+    
+    <div class="mobile-nav" id="mobileNav">
+      <ul>
+        <li><a href="https://pandit777.github.io/pyq/">Home</a></li>
+        <li><a href="Course.html">Courses</a></li>
+        <li><a href="About.html">About Us</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+        <li><a href="https://igu.ac.in/iguacademic?show=3">Syllabus</a></li>
+      </ul>
+    </div>
   </header>
 
   <main class="container mx-auto p-4 md:p-6 flex flex-col items-center">
-
-    <section class="about-section max-w-4xl text-center">
-      <h1 class="section-title">About IGU PYQ Portal</h1>
-      <p class="text-gray-700 leading-relaxed">
-        <span class="highlight">IGU PYQ</span> is a student-driven initiative created to help Indira Gandhi University (Meerpur) students access previous year question papers (PYQs) for all programs — undergraduate, postgraduate, and research — in one organized place.
+    
+    <!-- Query Button Section -->
+    <section class="contact-section max-w-3xl w-full text-center">
+      <h1 class="section-title">📬 Contact Us - IGU PYQ</h1>
+      <p class="text-gray-700 text-center mb-6">
+        Have questions, feedback, or suggestions? Click the button below to reach out to the <br /><a href="https://igu.ac.in/"><mark style="color:Blue">IGU PYQ</mark></a> team.  
+        We'll get back to you as soon as possible.
       </p>
-      <p class="text-gray-700 leading-relaxed mt-4">
-        We aim to simplify the process of finding study materials and provide a digital space for academic preparation that’s fast, free, and reliable.
-      </p>
+      
+      <div class="flex flex-col items-center space-y-4">
+        <button class="query-btn" id="queryBtn">
+          <i class="fas fa-question-circle"></i>
+          Query Related Field
+        </button>
+        
+        <!-- Additional IGU Official Link -->
+        <a href="https://igu.ac.in" target="_blank" class="text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-2">
+          <i class="fas fa-globe"></i>
+          Visit Official IGU Website: igu.ac.in
+        </a>
+      </div>
     </section>
 
-    <section class="about-section max-w-4xl mt-8">
-      <h2 class="section-title">🎯 Our Vision & Mission</h2>
-      <ul class="list-disc pl-6 text-gray-700 space-y-2">
-        <li>To make IGU students’ learning experience more efficient and accessible.</li>
-        <li>To create a centralized platform for all course-related PYQs and resources.</li>
-        <li>To promote smart and digital learning within the IGU community.</li>
-        <li>To ensure that every student can access the right materials without any cost.</li>
-      </ul>
-    </section>
-
-    <section class="about-section max-w-4xl mt-8 text-center">
-      <h2 class="section-title">💻 Our Team</h2>
+    <section class="contact-section max-w-3xl w-full mt-8 text-center">
+      <h2 class="section-title">📍 Our Location</h2>
       <p class="text-gray-700">
-        The <span class="highlight">IGU PYQ Portal</span> is developed and maintained by passionate students and tech enthusiasts from IGU who believe in open access to education.  
+        <strong>Indira Gandhi University, Meerpur</strong>  
+        <br> Rewari, Haryana – 122502  
         <br><br>
-        <strong>Website Developer:</strong> Gourav  
+        <strong>Official Website:</strong> <a href="https://igu.ac.in" target="_blank" class="text-blue-600 hover:underline font-semibold">igu.ac.in</a>
         <br>
-        <strong>Goal:</strong> To make quality study materials available to every student in a clean, modern, and user-friendly interface.
+        <strong>Email:</strong> <a href="mailto:igupyq@gmail.com" class="text-blue-600 hover:underline">igupyq@gmail.com</a>  
+        <br>
+        <strong>Instagram:</strong> <a href="https://instagram.com/velogourav" target="_blank" class="text-blue-600 hover:underline">@velogourav</a>
       </p>
+    </section>
+
+    <!-- Mobile-specific contact info -->
+    <section class="contact-section max-w-3xl w-full mt-8 text-center md:hidden">
+      <h2 class="section-title">📱 Quick Contact</h2>
+      <div class="flex justify-center space-x-6 mt-4">
+        <a href="https://igu.ac.in" target="_blank" class="text-green-600 hover:text-green-800">
+          <i class="fas fa-university text-2xl mb-2"></i>
+          <p class="text-sm">IGU Website</p>
+        </a>
+        <a href="mailto:igupyq@gmail.com" class="text-blue-600 hover:text-blue-800">
+          <i class="fas fa-envelope text-2xl mb-2"></i>
+          <p class="text-sm">Email</p>
+        </a>
+        <a href="https://instagram.com/velogourav" target="_blank" class="text-pink-600 hover:text-pink-800">
+          <i class="fab fa-instagram text-2xl mb-2"></i>
+          <p class="text-sm">Instagram</p>
+        </a>
+      </div>
     </section>
 
   </main>
 
+  <!-- Form Overlay -->
+  <div class="form-overlay" id="formOverlay">
+    <div class="form-container">
+      <button class="close-btn" id="closeForm">
+        <i class="fas fa-times"></i>
+      </button>
+      
+      <h2 class="section-title">📝 Contact Form</h2>
+      <p class="text-gray-700 text-center mb-6">
+        Fill out the form below and we'll get back to you as soon as possible.
+      </p>
+
+      <!-- Contact Form -->
+      <form id="contactForm" class="space-y-4">
+        <div>
+          <label for="name" class="block font-semibold text-gray-800 mb-1">Full Name</label>
+          <input type="text" id="name" name="name" required
+            class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div>
+          <label for="email" class="block font-semibold text-gray-800 mb-1">Email Address</label>
+          <input type="email" id="email" name="email" required
+            class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div>
+          <label for="message" class="block font-semibold text-gray-800 mb-1">Your Message</label>
+          <textarea id="message" name="message" rows="5" required
+            class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+        </div>
+
+        <button type="submit" 
+          class="w-full bg-blue-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-blue-700 transition">
+          Send Message
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div class="success-modal" id="successModal">
+    <div class="success-content">
+      <div class="success-icon">
+        <i class="fas fa-check-circle"></i>
+      </div>
+      <h2 class="text-2xl font-bold text-gray-800 mb-2">Message Sent!</h2>
+      <p class="text-gray-600 mb-4">Thank you for contacting us. We'll get back to you soon.</p>
+      <button class="continue-btn" id="continueBtn">
+        Continue...
+      </button>
+    </div>
+  </div>
+
   <footer>
-    &copy; 2025 IGU PYQ Portal | Designed by Gourav
+    &copy; 2025 IGU PYQ Portal | Designed by Gourav Sharma | All Rights Reserved.
   </footer>
+
+  <script>
+    // API configuration - This would ideally be handled server-side
+    const API_CONFIG = {
+      accessKey: '26135714-726d-4de7-8d51-e9900e9f1f5d', // Replace with your actual access key
+      endpoint: 'https://api.web3forms.com/submit'
+    };
+
+    // Mobile menu toggle functionality
+    document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+      const mobileNav = document.getElementById('mobileNav');
+      const icon = this.querySelector('i');
+      
+      if (mobileNav.style.display === 'block') {
+        mobileNav.style.display = 'none';
+        icon.className = 'fas fa-bars';
+      } else {
+        mobileNav.style.display = 'block';
+        icon.className = 'fas fa-times';
+      }
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const mobileNav = document.getElementById('mobileNav');
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      
+      if (!mobileNav.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
+        mobileNav.style.display = 'none';
+        mobileMenuBtn.querySelector('i').className = 'fas fa-bars';
+      }
+    });
+
+    // Query Button - Open Form Overlay
+    document.getElementById('queryBtn').addEventListener('click', function() {
+      document.getElementById('formOverlay').style.display = 'flex';
+      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    });
+
+    // Close Form Overlay
+    document.getElementById('closeForm').addEventListener('click', function() {
+      document.getElementById('formOverlay').style.display = 'none';
+      document.body.style.overflow = 'auto'; // Restore scrolling
+    });
+
+    // Close overlay when clicking outside the form
+    document.getElementById('formOverlay').addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+    });
+
+    // Form submission handling
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      // Get form data
+      const formData = new FormData(this);
+      
+      // Add the API access key (in production, this should be handled server-side)
+      formData.append('access_key', API_CONFIG.accessKey);
+      
+      // Show loading state
+      const submitBtn = this.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Sending...';
+      submitBtn.disabled = true;
+      
+      try {
+        // Submit to Web3Forms
+        const response = await fetch(API_CONFIG.endpoint, {
+          method: 'POST',
+          body: formData
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+          // Close form overlay
+          document.getElementById('formOverlay').style.display = 'none';
+          document.body.style.overflow = 'auto';
+          
+          // Show success modal
+          document.getElementById('successModal').style.display = 'flex';
+          
+          // Reset form
+          this.reset();
+        } else {
+          alert('There was an error sending your message. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('There was an error sending your message. Please try again.');
+      } finally {
+        // Reset button state
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      }
+    });
+
+    // Continue button functionality
+    document.getElementById('continueBtn').addEventListener('click', function() {
+      // Close success modal
+      document.getElementById('successModal').style.display = 'none';
+      // Redirect to home page
+      window.location.href = 'https://pandit777.github.io/pyq/';
+    });
+
+    // Close modal when clicking outside
+    document.getElementById('successModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.style.display = 'none';
+      }
+    });
+  </script>
 
 </body>
 </html>
