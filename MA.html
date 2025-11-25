@@ -580,7 +580,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    <!-- Second year papers would go here -->
                 </tbody>
             </table>
             <div class="card-container" id="secondYearCards">
@@ -592,6 +592,10 @@
             <i class="fas fa-exclamation-circle"></i>
             <p>No papers found matching your criteria.</p>
         </div>
+        
+        <footer>
+            <p>© 2023 IGU PYQ Repository | All rights reserved</p>
+        </footer>
     </div>
     
     <script>
@@ -603,7 +607,7 @@
             const secondYearTable = document.getElementById('secondYearTable');
             const toggleFirstYear = document.getElementById('toggleFirstYear');
             const toggleSecondYear = document.getElementById('toggleSecondYear');
-            const noResultsMessage = document.getElementById('noResultsMessage'); // Fixed ID
+            const noResultsMessage = document.getElementById('noResultsMessage');
             
             // Card containers
             const firstYearCards = document.getElementById('firstYearCards');
@@ -626,7 +630,7 @@
                 return window.innerWidth <= 768;
             }
 
-            // Initialize toggle states MAsed on current view
+            // Initialize toggle states based on current view
             function initializeToggleStates() {
                 if (isMobile()) {
                     // Mobile view starts with card view (collapsed)
@@ -699,9 +703,9 @@
                 const card = document.createElement('div');
                 card.className = 'card';
                 
-                // Get the PDF URL from the data-pdf attribute
-                const downloadBtn = row.querySelector('.download-btn');
-                const pdfUrl = downloadBtn ? downloadBtn.getAttribute('data-pdf') : '#';
+                // Get the PDF URL from the download link
+                const downloadLink = row.querySelector('.download-btn');
+                const pdfUrl = downloadLink ? downloadLink.href : '#';
 
                 card.innerHTML = `
                     <div class="card-header">
@@ -722,20 +726,8 @@
                             <span class="card-value">${cells[4].textContent}</span>
                         </div>
                     </div>
-                    <a href="#" data-pdf="${pdfUrl}" class="download-btn"><i class="fas fa-download"></i> Download</a>
+                    <a href="${pdfUrl}" class="download-btn" target="_blank"><i class="fas fa-download"></i> Download</a>
                 `;
-
-                // Add click handler to download button
-                const cardDownloadBtn = card.querySelector('.download-btn');
-                cardDownloadBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const pdfUrl = this.getAttribute('data-pdf');
-                    if (pdfUrl && pdfUrl !== '#' && pdfUrl !== '') {
-                        window.open(pdfUrl, '_blank');
-                    } else {
-                        alert('PDF not available');
-                    }
-                });
 
                 return card;
             }
@@ -844,7 +836,7 @@
                     const matchesFilter = activeFilter === 'all' ||
                                         semester.includes(activeFilter.toLowerCase());
 
-                    // Show or hide row MAsed on search and filter
+                    // Show or hide row based on search and filter
                     if (matchesSearch && matchesFilter) {
                         row.style.display = '';
                         visibleCount++;
@@ -856,8 +848,8 @@
                 // Show no results message if needed
                 noResultsMessage.style.display = visibleCount === 0 ? 'block' : 'none';
 
-                // Show/hide table headers MAsed on visible rows
-                const tables = [firstYearTable, secondYearTable, thirdYearTable];
+                // Show/hide table headers based on visible rows
+                const tables = [firstYearTable, secondYearTable];
                 tables.forEach(table => {
                     if (table) {
                         const header = table.querySelector('thead');
@@ -867,19 +859,6 @@
                     }
                 });
             }
-
-            // Initialize download buttons
-            document.querySelectorAll('.download-btn').forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const pdfUrl = this.getAttribute('data-pdf');
-                    if (pdfUrl && pdfUrl !== '#' && pdfUrl !== '') {
-                        window.open(pdfUrl, '_blank');
-                    } else {
-                        alert('PDF not available');
-                    }
-                });
-            });
 
             // Initial setup
             initializeToggleStates();
