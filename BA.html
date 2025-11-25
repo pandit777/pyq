@@ -29,7 +29,7 @@
         }
 
         header {
-            background: linear-gradient(135deg, #0d9488 0%, #0d9488 100%);
+            background: linear-gradient(135deg, #00897B 0%, #00897B 100%);
             color: white;
             padding: 15px;
             text-align: center;
@@ -82,7 +82,7 @@
         }
 
         .search-box input:focus {
-            border-color: #0d9488;
+            border-color: #00897B;
             box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.2);
             outline: none;
         }
@@ -103,15 +103,15 @@
             cursor: pointer;
             font-size: 12px;
             font-weight: 500;
-            color: #0d9488;
+            color: #00897B;
             transition: all 0.2s ease;
             white-space: nowrap;
         }
 
         .filter-btn:hover, .filter-btn.active {
-            background-color: #0d9488;
+            background-color: #00897B;
             color: white;
-            border-color: #0d9488;
+            border-color: #00897B;
         }
 
         .table-container {
@@ -123,7 +123,7 @@
         }
 
         .table-header {
-            background: linear-gradient(135deg, #0d9488 0%, #0d9488 100%);
+            background: linear-gradient(135deg, #00897B 0%, #00897B 100%);
             color: white;
             padding: 12px 15px;
             display: flex;
@@ -167,7 +167,7 @@
         th {
             background-color: #f8fafd;
             font-weight: 600;
-            color: #0d9488;
+            color: #00897B;
             position: sticky;
             top: 0;
         }
@@ -183,7 +183,7 @@
         .download-btn {
             display: inline-block;
             padding: 6px 10px;
-            background-color: #0d9488;
+            background-color: #00897B;
             color: white;
             text-decoration: none;
             border-radius: 4px;
@@ -216,7 +216,7 @@
         .no-results i {
             font-size: 2.5rem;
             margin-bottom: 10px;
-            color: #0d9488;
+            color: #00897B;
         }
 
         footer {
@@ -251,7 +251,7 @@
 
         .card-title {
             font-weight: 600;
-            color: #0d9488;
+            color: #00897B;
             font-size: 14px;
             flex: 1;
             margin-right: 10px;
@@ -259,7 +259,7 @@
 
         .card-semester {
             background: #f0f9ff;
-            color: #0d9488;
+            color: #00897B;
             padding: 3px 8px;
             border-radius: 10px;
             font-size: 10px;
@@ -1288,7 +1288,7 @@
             const toggleFirstYear = document.getElementById('toggleFirstYear');
             const toggleSecondYear = document.getElementById('toggleSecondYear');
             const toggleThirdYear = document.getElementById('toggleThirdYear');
-            const noResultsMessage = document.getElementById('noResults');
+            const noResultsMessage = document.getElementById('noResultsMessage');
             
             // Card containers
             const firstYearCards = document.getElementById('firstYearCards');
@@ -1325,6 +1325,11 @@
                     toggleFirstYear.querySelector('i').className = 'fas fa-chevron-down';
                     toggleSecondYear.querySelector('i').className = 'fas fa-chevron-down';
                     toggleThirdYear.querySelector('i').className = 'fas fa-chevron-down';
+                    
+                    // Initialize mobile view
+                    toggleSection('firstYear', toggleFirstYear, toggleStates.firstYear);
+                    toggleSection('secondYear', toggleSecondYear, toggleStates.secondYear);
+                    toggleSection('thirdYear', toggleThirdYear, toggleStates.thirdYear);
                 } else {
                     // Desktop view starts with tables visible
                     toggleStates.firstYear = true;
@@ -1335,6 +1340,11 @@
                     toggleFirstYear.querySelector('i').className = 'fas fa-chevron-up';
                     toggleSecondYear.querySelector('i').className = 'fas fa-chevron-up';
                     toggleThirdYear.querySelector('i').className = 'fas fa-chevron-up';
+                    
+                    // Initialize desktop view
+                    toggleSection('firstYear', toggleFirstYear, toggleStates.firstYear);
+                    toggleSection('secondYear', toggleSecondYear, toggleStates.secondYear);
+                    toggleSection('thirdYear', toggleThirdYear, toggleStates.thirdYear);
                 }
             }
 
@@ -1425,7 +1435,7 @@
                 cardDownloadBtn.addEventListener('click', function(e) {
                     e.preventDefault();
                     const pdfUrl = this.getAttribute('data-pdf');
-                    if (pdfUrl && pdfUrl !== '') {
+                    if (pdfUrl && pdfUrl !== '#' && pdfUrl !== '') {
                         window.open(pdfUrl, '_blank');
                     } else {
                         alert('PDF not available');
@@ -1448,11 +1458,15 @@
                         if (table) table.style.display = 'table';
                         if (cards) cards.style.display = 'none';
                         toggleButton.querySelector('i').className = 'fas fa-chevron-up';
+                        container.classList.remove('mobile-card-view');
+                        container.classList.add('desktop-view');
                     } else {
                         // Show card view
                         if (table) table.style.display = 'none';
                         if (cards) cards.style.display = 'block';
                         toggleButton.querySelector('i').className = 'fas fa-chevron-down';
+                        container.classList.remove('desktop-view');
+                        container.classList.add('mobile-card-view');
                     }
                 } else {
                     // Desktop view: toggle table visibility
@@ -1473,7 +1487,9 @@
             // Add event listeners for search
             searchInput.addEventListener('input', function() {
                 performSearch();
-                generateCards();
+                if (isMobile()) {
+                    generateCards();
+                }
             });
 
             // Add event listeners for filter buttons
@@ -1488,7 +1504,9 @@
 
                     // Perform search with current filter
                     performSearch();
-                    generateCards();
+                    if (isMobile()) {
+                        generateCards();
+                    }
                 });
             });
 
@@ -1496,16 +1514,25 @@
             toggleFirstYear.addEventListener('click', function() {
                 toggleStates.firstYear = !toggleStates.firstYear;
                 toggleSection('firstYear', this, toggleStates.firstYear);
+                if (isMobile()) {
+                    generateCards();
+                }
             });
 
             toggleSecondYear.addEventListener('click', function() {
                 toggleStates.secondYear = !toggleStates.secondYear;
                 toggleSection('secondYear', this, toggleStates.secondYear);
+                if (isMobile()) {
+                    generateCards();
+                }
             });
 
             toggleThirdYear.addEventListener('click', function() {
                 toggleStates.thirdYear = !toggleStates.thirdYear;
                 toggleSection('thirdYear', this, toggleStates.thirdYear);
+                if (isMobile()) {
+                    generateCards();
+                }
             });
 
             // Search function
@@ -1559,7 +1586,7 @@
                 button.addEventListener('click', function(e) {
                     e.preventDefault();
                     const pdfUrl = this.getAttribute('data-pdf');
-                    if (pdfUrl && pdfUrl !== '') {
+                    if (pdfUrl && pdfUrl !== '#' && pdfUrl !== '') {
                         window.open(pdfUrl, '_blank');
                     } else {
                         alert('PDF not available');
@@ -1572,21 +1599,11 @@
             performSearch();
             generateCards();
 
-            // Apply initial toggle states
-            toggleSection('firstYear', toggleFirstYear, toggleStates.firstYear);
-            toggleSection('secondYear', toggleSecondYear, toggleStates.secondYear);
-            toggleSection('thirdYear', toggleThirdYear, toggleStates.thirdYear);
-
             // Handle window resize
             window.addEventListener('resize', function() {
                 // Reinitialize toggle states on resize
                 initializeToggleStates();
                 generateCards();
-                
-                // Reapply toggle states after resize
-                toggleSection('firstYear', toggleFirstYear, toggleStates.firstYear);
-                toggleSection('secondYear', toggleSecondYear, toggleStates.secondYear);
-                toggleSection('thirdYear', toggleThirdYear, toggleStates.thirdYear);
             });
         });
     </script>
