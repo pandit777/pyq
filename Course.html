@@ -1,123 +1,199 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Courses - IGU PYQ</title>
-    <link data-default-icon="https://tse3.mm.bing.net/th/id/OIP.z_fzg6Mzca-JYwBcFMihTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" rel="icon" sizes="192x192" href="https://tse3.mm.bing.net/th/id/OIP.z_fzg6Mzca-JYwBcFMihTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" />
-    <!-- Tailwind CSS CDN for styling -->
+    <title>Courses - University PYQ Portal</title>
+    
+    <link data-default-icon="https://pandit777.github.io/pyq/logo.png" rel="icon" sizes="192x192" href="https://pandit777.github.io/pyq/logo.png" />
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts for Inter -->
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Font Awesome for icons -->
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        /* Custom styles */
+        /* ---------------------------------------------------------------------- */
+        /* PROFESSIONAL COLOR VARIABLES (ENHANCED COLOR SCHEME) */
+        /* ---------------------------------------------------------------------- */
         :root {
-            --primary: #4c8cae;
-            --primary-dark: #3a6d8a;
-            --secondary: #f8f9fa;
-            --accent: #e63946;
-            --text: #2d3748;
+            --primary-dark-navy: #1a237e;
+            --primary-medium-blue: #283593;
+            --accent-yellow: #ffc107;
+            --accent-gold: #ffb300;
+            --gradient-primary: linear-gradient(135deg, #1a237e 0%, #283593 50%, #3949ab 100%);
+            --gradient-accent: linear-gradient(135deg, #ffc107 0%, #ffb300 100%);
+            --gradient-card: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            --text-main: #2d3748;
             --text-light: #718096;
+            --background-light: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --shadow-strong: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
-        
+
+        /* Smooth scrolling for the whole page */
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
-            color: var(--text);
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-main);
+            background: var(--background-light);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
         }
-        
-        /* Header styles matching the first example */
+
+        /* ---------------------------------------------------------------------- */
+        /* HEADER & NAVIGATION STYLES (CONSISTENT WITH OTHER PAGES) */
+        /* ---------------------------------------------------------------------- */
         header {
-            background: linear-gradient(135deg, #1a237e, #283593);
+            background: var(--gradient-primary);
             color: white;
-            padding: 0;
-            position: relative;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--shadow-medium);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
         }
-        
-        .header-image {
-            width: 100%;
-            overflow: hidden;
+
+        .header-content {
             display: flex;
-            align-items: flex;
-            justify-content: center;
-            background-color: #1a237e;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 2rem;
             position: relative;
+            z-index: 100;
         }
         
-        .header-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        
-        marquee {
-            background: #ffc107;
-            color: #333;
-            padding: 10px;
-            font-weight: bold;
-            font-size: 1.2rem;
-            width: 100%;
-        }
-        
-        nav {
-            background-color: #285b53;
-            padding: 15px 0;
-        }
-        
-        nav ul {
+        .logo-area {
             display: flex;
-            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            margin-right: 1rem;
+            border-radius: 12px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+            background: white;
+            padding: 5px;
+        }
+        
+        .logo-area:hover .logo-img {
+            transform: rotate(-5deg) scale(1.1); 
+        }
+
+        .header-title {
+            font-size: 2.2rem;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            background: linear-gradient(135deg, #ffffff 0%, #ffeb3b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .desktop-nav ul {
+            display: flex;
             list-style: none;
-            flex-wrap: wrap;
+            padding: 0;
+            margin: 0;
+            gap: 5px;
         }
-        
-        nav ul li {
-            margin: 0 15px;
-        }
-        
-        nav ul li a {
+
+        .desktop-nav ul li a {
             color: white;
             text-decoration: none;
-            font-weight: bold;
-            padding: 5px 10px;
-            border-radius: 4px;
-            transition: background-color 0.3s;
+            font-weight: 600;
+            padding: 10px 18px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            margin-left: 5px;
+            cursor: pointer; 
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .desktop-nav ul li a:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .desktop-nav ul li a:hover:before {
+            left: 100%;
+        }
+
+        .desktop-nav ul li a:hover {
+            background-color: rgba(255,255,255,0.1); 
+            color: var(--accent-yellow); 
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
         
-        nav ul li a:hover {
-            background-color: #283593;
+        .active-nav-link {
+            background-color: rgba(255,255,255,0.15) !important;
+            color: var(--accent-yellow) !important;
+            border: 1px solid var(--accent-yellow) !important;
+            box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3) !important;
         }
         
-        /* Mobile-specific styles */
+        /* Mobile Menu Button */
         .mobile-menu-btn {
-            display: none;
+            display: none; 
             background: none;
             border: none;
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
-            position: absolute;
-            top: 15px;
-            right: 15px;
             z-index: 100;
-            background-color: rgba(0,0,0,0.5);
-            border-radius: 4px;
-            padding: 5px 10px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 8px 12px;
+            transition: all 0.3s ease;
         }
 
+        .mobile-menu-btn:hover {
+            background-color: rgba(255,255,255,0.2);
+            transform: scale(1.05);
+        }
+
+        /* Mobile Nav Container */
         .mobile-nav {
-            display: none;
-            background-color: #285b53;
-            padding: 1rem;
+            display: none; 
+            background: var(--gradient-primary);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-strong);
+            width: 100%; 
+            position: absolute; 
+            top: 100%; 
+            left: 0;
+            z-index: 99; 
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .mobile-nav ul {
@@ -126,23 +202,89 @@
         }
 
         .mobile-nav ul li {
-            margin: 10px 0;
+            margin: 12px 0;
         }
 
         .mobile-nav ul li a {
             color: white;
             text-decoration: none;
             display: block;
-            padding: 10px;
-            border-radius: 4px;
-            transition: background-color 0.3s;
+            padding: 12px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent; 
+            font-weight: 600;
         }
 
         .mobile-nav ul li a:hover {
-            background-color: #283593;
+            background-color: rgba(255,255,255,0.1);
+            transform: translateX(5px);
+        }
+
+        /* ---------------------------------------------------------------------- */
+        /* MARQUEE BAR (ENHANCED) */
+        /* ---------------------------------------------------------------------- */
+        marquee {
+            background: var(--gradient-accent);
+            color: var(--primary-dark-navy);
+            padding: 12px 0; 
+            font-weight: 700;
+            font-size: 1rem;
+            width: 100%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            line-height: 1; 
+        }
+
+        /* ---------------------------------------------------------------------- */
+        /* FOOTER STYLES (ENHANCED) */
+        /* ---------------------------------------------------------------------- */
+        footer {
+            margin-top: auto;
+            background: var(--gradient-primary); 
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            width: 100%;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        footer:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-accent);
+        }
+
+        /* ---------------------------------------------------------------------- */
+        /* GENERAL ANIMATION STYLES */
+        /* ---------------------------------------------------------------------- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
         
-        /* Rest of the custom styles */
+        .content-section {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* ---------------------------------------------------------------------- */
+        /* COURSE BUTTONS STYLES */
+        /* ---------------------------------------------------------------------- */
         .course-button {
             position: relative;
             overflow: hidden;
@@ -197,18 +339,6 @@
             transform: translateY(-3px);
         }
         
-        footer {
-            margin-top: auto;
-            background: var(--primary);
-            color: white;
-            text-align: center;
-            padding: 1.5rem;
-            width: 100%;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            background-color: #285b53;
-        }
-        
         /* Animation for page load */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
@@ -225,18 +355,66 @@
             margin-top: 2rem;
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--primary);
-            color: var(--primary-dark);
+            border-bottom: 2px solid var(--primary-medium-blue);
+            color: var(--primary-dark-navy);
         }
 
-        /* Mobile responsive adjustments */
+        /* Back to Home Button */
+        .back-home-btn {
+            display: inline-block;
+            background: var(--gradient-accent);
+            color: var(--primary-dark-navy);
+            padding: 0.8rem 2.2rem;
+            border-radius: 10px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(255, 193, 7, 0.3);
+            border: none;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+        }
+
+        .back-home-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .back-home-btn:hover:before {
+            left: 100%;
+        }
+
+        .back-home-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 193, 7, 0.4);
+        }
+
+        /* ---------------------------------------------------------------------- */
+        /* MOBILE MEDIA QUERY */
+        /* ---------------------------------------------------------------------- */
         @media (max-width: 768px) {
-            .header-image { 
-                height: auto;
-                min-height: 150px;
+            .header-content {
+                padding: 1rem;
+            }
+            .logo-img {
+                width: 50px;
+                height: 50px;
+                margin-right: 0.8rem;
+            }
+            .header-title {
+                font-size: 1.6rem;
             }
             
-            nav ul { 
+            /* Hide Desktop Nav and Show Mobile Button */
+            .desktop-nav { 
                 display: none; 
             }
             
@@ -260,6 +438,15 @@
         }
 
         @media (max-width: 480px) {
+            .header-title {
+                font-size: 1.4rem;
+            }
+            
+            .logo-img {
+                width: 45px;
+                height: 45px;
+            }
+            
             .category-title {
                 font-size: 1.2rem;
             }
@@ -278,42 +465,57 @@
 </head>
 <body>
 
+    <!-- Consistent Header -->
     <header>
-        <div class="header-image">
-            <img src="logo.png" alt="Indira Gandhi University Header">
+        <div class="header-content">
+            
+            <a href="index.html" class="logo-area">
+                <img src="https://pandit777.github.io/pyq/logo.png" alt="University PYQ Portal Logo" class="logo-img"> 
+                <h1 class="header-title">Exam Saarthi</h1>
+            </a>
+            
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="universities.html">Universities</a></li>
+                    <li><a href="About.html">About</a></li>
+                    <li><a href="Contact.html">Contact</a></li>
+                    <li><a href="https://igu.ac.in/iguacademic?show=3" target="_blank">Syllabus</a></li>
+                </ul>
+            </nav>
+
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
+        
         <marquee behavior="scroll" direction="left" scrollamount="6">
-            Welcome to the IGU PYQ Portal - Your Gateway to Academic Excellence!
+            <i class="fas fa-bullhorn mr-2"></i> Welcome to the IGU PYQ Portal - Your Gateway to Academic Excellence! Explore courses and previous year papers.
         </marquee>
-        <nav>
-            <ul>
-                <li><a href="https://pandit777.github.io/pyq/">Home</a></li>
-                <li><a href="Course.html">Courses</a></li>
-                <li><a href="About.html">About Us</a></li>
-                <li><a href="Contact.html">Contact</a></li>
-                <li><a href="https://igu.ac.in/iguacademic?show=3">Syllabus</a></li>
-            </ul>
-        </nav>
         
         <div class="mobile-nav" id="mobileNav">
             <ul>
-                <li><a href="https://pandit777.github.io/pyq/">Home</a></li>
-                <li><a href="Course.html">Courses</a></li>
-                <li><a href="About.html">About Us</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="universities.html">Universities</a></li>
+                <li><a href="About.html">About</a></li>
                 <li><a href="Contact.html">Contact</a></li>
-                <li><a href="https://igu.ac.in/iguacademic?show=3">Syllabus</a></li>
+                <li><a href="https://igu.ac.in/iguacademic?show=3" target="_blank">Syllabus</a></li>
             </ul>
         </div>
     </header>
 
     <main class="container mx-auto p-4 md:p-6 flex flex-col items-center">
 
+        <!-- Back to Home Button -->
+        <div class="w-full max-w-6xl mb-6 text-left">
+            <a href="Universities.html" class="back-home-btn">
+                <i class="fas fa-arrow-left mr-2"></i> Back to Home
+            </a>
+        </div>
+
         <!-- Course Selection Buttons -->
         <section class="mt-10 w-full max-w-6xl">
-            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Explore by Course</h2>
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Explore IGU Courses</h2>
             
             <!-- Undergraduate Courses -->
             <h3 class="category-title">Undergraduate Programs</h3>
@@ -401,11 +603,37 @@
                     <i>🏅</i> DPED
                 </button>
             </div>
+
+            <!-- Quick Info Section -->
+            <div class="mt-12 p-6 bg-white rounded-xl shadow-md border border-gray-100">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">📋 Course Information</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-semibold text-gray-700 mb-2">How to Use:</h4>
+                        <ul class="text-gray-600 space-y-1">
+                            <li>• Click on any course button to view papers</li>
+                            <li>• Select year and semester for papers</li>
+                            <li>• Download PDFs for offline study</li>
+                            <li>• Search within papers for specific topics</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-700 mb-2">Features:</h4>
+                        <ul class="text-gray-600 space-y-1">
+                            <li>• All previous year question papers</li>
+                            <li>• Semester-wise organization</li>
+                            <li>• Mobile-friendly interface</li>
+                            <li>• Regular updates with new papers</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
+    <!-- Consistent Footer -->
     <footer>
-        &copy; 2025 IGU PYQ Portal | Designed by Gourav Sharma
+        &copy; 2025 University PYQ Portal | Designed by Gourav Sharma
     </footer>
 
     <script>
@@ -428,9 +656,23 @@
             const mobileNav = document.getElementById('mobileNav');
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             
-            if (!mobileNav.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
+            if (mobileNav.style.display === 'block' && 
+                !mobileNav.contains(event.target) && 
+                !mobileMenuBtn.contains(event.target)) {
                 mobileNav.style.display = 'none';
                 mobileMenuBtn.querySelector('i').className = 'fas fa-bars';
+            }
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.background = 'rgba(26, 35, 126, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = '';
+                header.style.backdropFilter = '';
             }
         });
 
@@ -535,5 +777,3 @@
     </script>
 </body>
 </html>
-
-
